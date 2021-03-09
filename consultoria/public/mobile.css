@@ -1,0 +1,103 @@
+
+@media screen and (max-width: 860px){
+
+  .titulo-coin{
+    padding-bottom: 30%; 
+    border-top: 2px solid #fff;
+    font-size: 35px;
+    color: #fff;
+  }
+
+  .btn-success{
+    max-width: 50px;
+  }
+
+  .navbar .nav-item .dropdown-menu{  
+    display:block; 
+    opacity: 0;  
+    visibility: hidden; 
+    transition:.3s; 
+    margin-top:0;  
+  }
+
+  .navbar .nav-item .dropdown-menu .dropdown-item:hover {
+    color: rgba(35, 126, 50, 0.623); 
+    font-weight: bold;
+  }
+
+	.nav-link:hover{ 
+    border-bottom: 2px solid rgba(35, 126, 50, 0.623); 
+    border-top: 2px solid rgba(35, 126, 50, 0.623); 
+    transition: .3s;
+  }
+	.navbar .dropdown-menu.fade-down{ 
+    top:80%; transform: rotateX(-75deg); 
+    transform-origin: 0% 0%; 
+  }
+	.navbar .nav-item:hover .dropdown-menu{ 
+    transition: .3s; 
+    opacity:1; 
+    visibility:visible; 
+    top:100%; 
+    transform: rotateX(0deg); 
+  }
+
+  .logito{
+    max-height: 50px;
+    max-width: 50px;
+    position: relative;
+  }
+  
+  .logito img {
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .carousel-item {
+    min-height: 240px;
+  }
+
+  .carousel-item img{
+    object-fit: cover;
+  }
+
+  .nav2{
+    color: #fff;
+  }
+
+  .icono{
+    display: block;
+    cursor: pointer;
+  }
+
+  .equipo{
+    flex-direction: column;
+  }
+
+  h1{
+    font-size: 30px;
+  }
+
+  h2{
+    font-size: 35px;
+  }
+
+  .after{
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+  }
+  
+  .after::after{
+    content:'';
+    display: block;
+    margin: auto;
+    margin-top: 30px;
+    width: 90%;
+    height: 3px;
+    background: var(--color3);
+    margin-bottom: 30px;
+  }
+
+}
