@@ -1,145 +1,246 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-KPS4WQQ');</script>
-  <!-- End Google Tag Manager -->
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+    <head>
+		  <!-- Google Tag Manager -->
+		  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		  })(window,document,'script','dataLayer','GTM-KPS4WQQ');</script>
+		  <!-- End Google Tag Manager -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>TEPUY.site</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+		 <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
 
-  <!-- Page Information
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta charset="utf-8">
-  <title>TEPUY</title>
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <!-- Mobile Specific Metas
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- FONT
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800&display=swap" rel="stylesheet">
-
-  <!-- CSS
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/skeleton-dark.css">
-  <link rel="stylesheet" href="css/brands.css">
-
-  <!-- Favicon
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="icon" type="image/png" href="images/avatar.png">
-
-</head>
-<body>
-  <!-- Messenger plugin de chat Code -->
-    <div id="fb-root"></div>
-
-    <!-- Your plugin de chat code -->
-    <div id="fb-customer-chat" class="fb-customerchat">
-    </div>
-
-    <script>
-      var chatbox = document.getElementById('fb-customer-chat');
-      chatbox.setAttribute("page_id", "100514382079508");
-      chatbox.setAttribute("attribution", "biz_inbox");
-
-      window.fbAsyncInit = function() {
-        FB.init({
-          xfbml            : true,
-          version          : 'v12.0'
-        });
-      };
-
-      (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = 'https://connect.facebook.net/es_LA/sdk/xfbml.customerchat.js';
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
-    </script>
-  <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KPS4WQQ"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-
-  <!-- Primary Page Layout
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <div class="container">
-    <div class="row">
-      <div class="column" style="margin-top: 10%">
-        <!-- Your Image Here -->
-        <style>
-          img.avatar {
-            border: 2px solid white;
-            border-radius: 50%;
-          }
-          a.small {
-            background: #1DA1F2;
-            border-radius: 50px;
-            font-size: 18px;
-            text-align: center;
-            text-decoration: none;
-            height: 48px;
-            padding: 0 16px;
-            text-align: center;
-            vertical-align: middle;
-            font-size: 18px;
-            width: 300px;
-            font-weight: 600;
-            line-height: 48px;
-            letter-spacing: 0.5px;
-            background-color: transparent;
-            border-radius: 8px;
-            cursor: pointer;
-            box-sizing: border-box;
-          }
-          footer {
-            text-align: center;
-            padding: 3px;
-            color: white;
-            font-size: 12px;
-          }
-        </style>
-        <img src="images/avatar2.png" srcset="images/avatar2@2x.png 2x" >
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <!--        <link rel="stylesheet" href="assets/css/bootstrap-theme.min.css">-->
 
 
-        <!-- Your Name -->
+        <!--For Plugins external css-->
+        <link rel="stylesheet" href="assets/css/plugins.css" />
+        <link rel="stylesheet" href="assets/css/roboto-webfont.css" />
 
-        <!-- Short Bio -->
-        <!-- <p>Hola. Somos un emprendimiento familiar que apostamos a nuestro país y al crecimiento!!!.</p> -->
+        <!--Theme custom css -->
+        <link rel="stylesheet" href="assets/css/style.css">
 
-        <!-- <br> -->
-        <br>
-        <br>
-        <!-- <a class="button button-snapchat" href="https://tepuy.site/consultoria/index.html"><img class="icon" src="icons/calendar.svg">Consultorías</a><br> -->
-        <!-- <a class="button button-linkedin" href="https://links.tepuy.site/it"><img class="icon" src="icons/tech.svg">tepuy IT</a> <br> -->
-        <a class="button button-snapchat" href="https://links.tepuy.site/tepuyit"><img class="icon" src="icons/tech.svg">tepuy IT</a> <br>
-        <!-- <a class="button button-youtube" href="https://links.tepuy.site/garage"><img class="icon" src="icons/sales.svg">tepuy GARAGE</a> <br> -->
-        <a class="button button-linkedin" href="https://links.tepuy.site/garage"><img class="icon" src="icons/sales.svg">tepuy GARAGE</a> <br>
-        <!-- <a class="button button-medium" href="https://links.tepuy.site/blog"><img class="icon" src="icons/medium.svg">blog</a> <br> -->
-        <a class="button button-youtube" href="https://links.tepuy.site/blog"><img class="icon" src="icons/medium.svg">blog</a> <br>
-        <!-- <a class="button button-medium" href="https://links.tepuy.site/WhatsApp"><img class="icon" src="icons/whatsapp.svg">Enviame un WhatsApp</a> <br> -->
-        <!-- <a class="button button-medium" href="mailto:contact@tepuy.site"><img class="icon" src="icons/mail.svg">Enviame un mail</a> <br> -->
-        <a class="button button-medium" href="https://links.tepuy.site/cita"><img class="icon" src="icons/calendar.svg">Haz una Cita</a> <br>
-        <a class="button button-soundcloud" href="https://ko-fi.com/tepuyve"><img class="icon" src="icons/coffee.svg">Comprame un cafecito</a> <br>
-      <br>
-        <footer>
-          <p>Siempre hacia adelante como el elefante.</p>
-          <p>TEPUY © 2021</p>
-        </footer>
+        <!--Theme Responsive css-->
+        <link rel="stylesheet" href="assets/css/responsive.css" />
 
-      </div>
-    </div>
-  </div>
+        <script src="assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+		<div class='preloader'><div class='loaded'>&nbsp;</div></div>
+        <!-- Sections -->
+        <section id="social" class="social">
+            <div class="container">
+                <!-- Example row of columns -->
+                <div class="row">
+                    <div class="social-wrapper">
+                        <div class="col-md-6">
+                            <div class="social-icon">
+                                <!-- <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-google-plus"></i></a>
+                                <a href="#"><i class="fa fa-linkedin"></i></a> -->
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="social-contact">
+                                <a href="https://links.tepuy.site/WhatsApp/" target="_blank"><i class="fa fa-phone"></i>+58 4125359915</a>
+                                <a href="mailto:contact@tepuy.site"><i class="fa fa-envelope"></i>contact@tepuy.site</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- /container -->       
+        </section>
 
-<!-- End Document
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "43baa8664b7140278645f3fa5a0a5a7c"}'></script><!-- End Cloudflare Web Analytics -->
-</body>
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#"><img src="assets/images/logo.png" alt="Logo" width="250" class="img-circle img-responsive" /></a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <!-- <li class="active"><a href="#home">Home</a></li>
+                        <li><a href="#features">QUIENES SOMOS</a></li> -->
+                        <li><a href="https://links.tepuy.site/it/" target="_blank">IT</a></li>
+                        <li><a href="https://links.tepuy.site/garage/" target="_blank">GARAGE</a></li>
+                       <!-- <li><a href="#business">Business</a></li> -->
+                        <li><a href="https://links.tepuy.site/cita/" target="_blank">Cita</a></li>
+                       <!-- <li class="login"><a href="#">Sign In</a></li> -->
+                    </ul>
+
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+
+        <!--Home page style-->
+        <header id="home" class="home">
+            <div class="overlay-fluid-block">
+                <div class="container text-center">
+                    <div class="row">
+                        <div class="home-wrapper">
+                            <div class="col-md-10 col-md-offset-1">
+                                <div class="home-content">
+
+                                    <h1><strong>TEPUY</strong></h1>
+                                    <p>Somos un emprendimiento soportados por la Experiencia, Compromiso y Honestidad.<br>
+                                      Siempre hacia adelante como el elefante.
+                                    </p>
+
+                                    <div class="row">
+                                        <div class="col-md-6 col-md-offset-3 col-sm-12 col-xs-12">
+                                            <div class="home-contact">
+<!-- /input-group -->
+
+
+                                            </div>
+                                      </div>
+                                  </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>			
+            </div>
+        </header>
+
+        <!-- Sections -->
+        <section id="features" class="features sections">
+            <div class="container">
+                <div class="row">
+                    <div class="main_features_content2">
+
+                        <div class="col-sm-6">
+                            <div class="single_features_left text-center">
+                                <img src="assets/images/feature-2.jpg" alt="" />
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 margin-top-60">
+                            <div class="single_features_right ">
+                                <h2><strong>QUÉ OFRECEMOS?</strong></h2>
+                                <p>TEPUY. Somos un emprendimiento  que apostamos a nuestro país y al crecimiento continuo!!!. <br> 
+                                  <br>
+                                  Prestamos servicios de IT Especializado y tienda OnLine con productos varios nuevos y con historia.
+
+                              </p>
+                                <ul>
+                                  <li><a href="https://links.tepuy.site/it">SERVICIOS IT</a></li>
+                                    <li><a href="https://links.tepuy.site/garage">GARAGE</a></li>
+<li>&nbsp;</li>
+                                </ul>
+                                
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section><!--End of Features 2 Section -->
+        <section id="features" class="features sections">
+            <div class="container">
+                <div class="row">
+                    <div class="main_features_content2">
+
+                       
+
+                        <div class="col-sm-6 margin-top-60">
+                            <div class="single_features_right ">
+                                <h2><strong>NUESTROS SERVICIOS IT&nbsp;</strong></h2>
+                                <p>Somos su socio tecnológico apoyando a las empresas y particulares para que puedan alcanzar y maximizar el potencial de las soluciones tecnológicas.</p>
+                                <ul>
+                                    <li>Soporte IT</li>
+                                    <li>Cloud Solutions</li>
+                                    <li>Consultoría IT</li>
+                                </ul>
+                                
+                            </div>
+                        </div>
+                         <div class="col-sm-6">
+                            <div class="single_features_left text-center">
+                                <img src="assets/images/feature-1.jpg" alt="" />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section><!--End of Features 2 Section -->
+
+
+        <!-- End of Service2 Section -->		
+
+
+
+        <!-- Sections -->
+   
+
+
+        <section id="contact" class="contact sections">
+            <div class="container">
+                <div class="row">
+                    <div class="main_contact whitebackground">
+                        <div class="head_title text-center">
+                            <h2><strong>CONTACTANOS</strong></h2>
+						  <p>Estamos encantados de atender tus requerimientos !!!</p>
+						  <p>&nbsp;Nos encuentras en Bqto. Venezuela.</p>
+							<p>&nbsp;  <a href="https://links.tepuy.site/cita/" target="_blank"><i class="fa fa-calendar"></i></a>&nbsp; &nbsp;&nbsp;
+										<a href="mailto:contact@tepuy.site/" target="_blank"><i class="fa fa-envelope"></i></a>&nbsp; &nbsp;&nbsp;
+                                        <a href="https://links.tepuy.site/WhatsApp/" target="_blank"><i class="fa fa-whatsapp"></i></a>&nbsp; &nbsp;&nbsp;
+										<a href="https://links.tepuy.site/blog/" target="_blank"><i class="fa fa-medium"></i></a>&nbsp; &nbsp;&nbsp;
+                                        <a href="https://ko-fi.com/tepuyve/" target="_blank"><i class="fa fa-coffee"></i></a></p>
+						  <p>&nbsp;Made with <i class="fa fa-heart"></i> by TEPUY<a target="_blank" href="http://tepuy.site">&nbsp;</a>2022. All rights reserved.</p>
+                        </div>
+                        <div class="contact_content">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!-- End of Contact Section -->
+
+
+        
+
+
+        <!--Footer-->
+        
+		
+		
+		<div class="scrollup">
+			<a href="#"><i class="fa fa-chevron-up"></i></a>
+		</div>
+
+
+        <script src="assets/js/vendor/jquery-1.11.2.min.js"></script>
+        <script src="assets/js/vendor/bootstrap.min.js"></script>
+
+        <script src="assets/js/plugins.js"></script>
+        <script src="assets/js/modernizr.js"></script>
+        <script src="assets/js/main.js"></script>
+    </body>
 </html>
