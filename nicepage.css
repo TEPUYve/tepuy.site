@@ -37854,12 +37854,14 @@ a.u-link.u-text-hover-grey-90:hover {
 }
 
 .u-header .u-nav-1 {
+  font-weight: 700;
   font-size: 1rem;
 }
 
 .u-header .u-nav-2 {
   font-size: 1rem;
   letter-spacing: 0px;
+  font-weight: 700;
 }
 @media (max-width: 1199px) {
   .u-header .u-menu-1 {
