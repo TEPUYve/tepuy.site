@@ -1,5 +1,5 @@
 // Configuración de logos (fácil de actualizar)
-const clientLogosCount = 18; // Actualizar este número cuando añadas/quites logos
+const clientLogosCount = 21; // Actualizar este número cuando añadas/quites logos
 const brandLogosCount = 11;  // Actualizar este número cuando añadas/quites logos
 
 // Cargar logos dinámicamente
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }).mount();
     }, 100);
     
-    // Configurar formulario de WhatsApp
+    // Configurar formulario de WhatsApp - CORREGIDO Y MEJORADO
     const whatsappForm = document.getElementById('whatsapp-form');
     if (whatsappForm) {
         whatsappForm.addEventListener('submit', function(e) {
@@ -48,10 +48,15 @@ document.addEventListener('DOMContentLoaded', function() {
             const service = document.getElementById('service').value;
             const message = document.getElementById('message').value;
             
-            // Número de WhatsApp corregido (sin el + adicional)
-            const whatsappMessage = `Hola, soy ${name} (${email}). Estoy interesado en: ${service}. ${message}`;
+            // Formato mejorado del mensaje
+            const whatsappMessage = `Solicitud de Cotización\nNombre: ${name}\nEmail: ${email}\nTipo de servicio: ${service}\nMensaje: ${message}`;
             const encodedMessage = encodeURIComponent(whatsappMessage);
+            
+            // Número de WhatsApp corregido según requisito 6.h
             window.open(`https://wa.me/584125359915?text=${encodedMessage}`, '_blank');
+            
+            // Opcional: Resetear el formulario después del envío
+            whatsappForm.reset();
         });
     }
     
