@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tepuy.site/sitemap.xml
