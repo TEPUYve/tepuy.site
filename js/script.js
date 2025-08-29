@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }).mount();
     }, 100);
     
-    // Configurar formulario de WhatsApp - CORREGIDO Y MEJORADO
+    // Configurar formulario de WhatsApp - CORREGIDO PARA FUNCIONAR EN TODOS LOS DISPOSITIVOS
     const whatsappForm = document.getElementById('whatsapp-form');
     if (whatsappForm) {
         whatsappForm.addEventListener('submit', function(e) {
@@ -49,11 +49,21 @@ document.addEventListener('DOMContentLoaded', function() {
             const message = document.getElementById('message').value;
             
             // Formato mejorado del mensaje
-            const whatsappMessage = `Solicitud de Cotización\nNombre: ${name}\nEmail: ${email}\nTipo de servicio: ${service}\nMensaje: ${message}`;
-            const encodedMessage = encodeURIComponent(whatsappMessage);
+            const whatsappMessage = `Hola TEPUY, me interesa solicitar información sobre sus servicios.%0A%0A*Nombre:* ${name}%0A*Email:* ${email}%0A*Servicio de interés:* ${service}%0A*Mensaje:* ${message}`;
             
-            // Número de WhatsApp corregido según requisito 6.h
-            window.open(`https://wa.me/584125359915?text=${encodedMessage}`, '_blank');
+            // Detectar si es dispositivo móvil o escritorio
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            
+            // Crear URL según el dispositivo
+            let whatsappUrl;
+            if (isMobile) {
+                whatsappUrl = `https://wa.me/584125359915?text=${whatsappMessage}`;
+            } else {
+                whatsappUrl = `https://web.whatsapp.com/send?phone=584125359915&text=${whatsappMessage}`;
+            }
+            
+            // Abrir en una nueva ventana
+            window.open(whatsappUrl, '_blank');
             
             // Opcional: Resetear el formulario después del envío
             whatsappForm.reset();
