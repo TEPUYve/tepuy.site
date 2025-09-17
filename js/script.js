@@ -1,5 +1,5 @@
 // Configuración de logos (fácil de actualizar)
-const clientLogosCount = 23; // Actualizar este número cuando añadas/quites logos
+const clientLogosCount = 25; // Actualizar este número cuando añadas/quites logos
 const brandLogosCount = 16;  // Actualizar este número cuando añadas/quites logos
 
 // Cargar logos dinámicamente
