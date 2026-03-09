@@ -230,6 +230,16 @@
                             <option value="Sable">Sable</option>
                         </select>
                     </div>
+                    <div class="flex-1">
+                        <label for="filterMedal" class="block text-sm font-medium text-slate-700 mb-1">Resultado</label>
+                        <select id="filterMedal" class="w-full bg-white border border-slate-300 rounded-md py-2 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-navy-800">
+                            <option value="all">Todos</option>
+                            <option value="🥇">🏅 Oros (🥇)</option>
+                            <option value="🥈">🏅 Platas (🥈)</option>
+                            <option value="🥉">🏅 Bronces (🥉)</option>
+                            <option value="Participación">Solo Participación</option>
+                        </select>
+                    </div>
                 </div>
 
                 <!-- Table -->
@@ -331,11 +341,13 @@
         const tableBody = document.getElementById('athleteTableBody');
         const filterClub = document.getElementById('filterClub');
         const filterWeapon = document.getElementById('filterWeapon');
+        const filterMedal = document.getElementById('filterMedal');
         const rowCountDisplay = document.getElementById('rowCountDisplay');
 
         function renderTable() {
             const clubVal = filterClub.value;
             const weaponVal = filterWeapon.value;
+            const medalVal = filterMedal.value;
             
             tableBody.innerHTML = '';
             let count = 0;
@@ -343,8 +355,14 @@
             athletes.forEach(athlete => {
                 const matchClub = clubVal === 'all' || athlete.club === clubVal;
                 const matchWeapon = weaponVal === 'all' || athlete.weapon === weaponVal;
+                let matchMedal = true;
+                
+                if (medalVal !== 'all') {
+                    if (medalVal === 'Participación') matchMedal = athlete.status === 'Participación';
+                    else matchMedal = athlete.status.includes(medalVal);
+                }
 
-                if (matchClub && matchWeapon) {
+                if (matchClub && matchWeapon && matchMedal) {
                     count++;
                     const isMedalist = athlete.status.includes('Medallista');
                     const rowClass = isMedalist ? 'bg-amber-50 hover:bg-amber-100' : 'hover:bg-slate-50';
@@ -371,6 +389,7 @@
         // Event Listeners for filters
         filterClub.addEventListener('change', renderTable);
         filterWeapon.addEventListener('change', renderTable);
+        filterMedal.addEventListener('change', renderTable);
 
 
         // --- 3. CHARTS RENDERING (Chart.js) ---
