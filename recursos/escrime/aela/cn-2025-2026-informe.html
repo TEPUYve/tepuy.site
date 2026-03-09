@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Deportivo: Esgrima Lara 25-26</title>
+    
+    <!-- CSS Framework: Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js for Visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Chosen Palette: Navy Blue (Primary), Gold/Silver/Bronze (Accents), Slate (Neutrals) -->
+    <!-- Application Structure Plan: Dashboard Layout. 
+         1. Header & Executive Summary KPIs (Quick high-level impact).
+         2. Visual Analytics Section (Charts to understand distribution by weapon, gender, and clubs).
+         3. Strategic Projections (Insights for decision making).
+         4. Interactive Athlete Database (Filterable table for deep-dive exploration).
+         This structure moves from "macro" (overall success) to "micro" (individual athlete data), optimizing the user's reading flow and data discovery. -->
+    <!-- Visualization & Content Choices: 
+         - KPIs -> Goal: Inform -> Big bold numbers -> Interaction: Hover effects -> Justification: Immediate grasp of total success.
+         - Medals by Weapon -> Goal: Compare -> Bar Chart (Chart.js) -> Interaction: Tooltips -> Justification: Clear comparison of which weapon yields the most results.
+         - Gender Dist. -> Goal: Proportions -> Doughnut Chart (Chart.js) -> Interaction: Hover -> Justification: Highlights the 61% female dominance mentioned in the report.
+         - Athletes by Club -> Goal: Compare/Organize -> Horizontal Bar Chart -> Interaction: Tooltips -> Justification: Shows volume of athletes managed per entity.
+         - Athlete Database -> Goal: Organize/Filter -> Interactive HTML Table -> Interaction: Dropdown filters -> Justification: Allows auditing and finding specific athletes quickly.
+         - Confirming: NO SVG graphics used. NO Mermaid JS used. HTML/Unicode emojis used for icons. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: { 800: '#1e3a8a', 900: '#1e3a5f' },
+                        gold: '#fbbf24',
+                        silver: '#9ca3af',
+                        bronze: '#b45309'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Chart Container Styling - Mandatory Constraint */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container { height: 350px; }
+        }
+        
+        /* Custom scrollbar for the table */
+        .table-scroll::-webkit-scrollbar { height: 8px; width: 8px; }
+        .table-scroll::-webkit-scrollbar-track { background: #f1f5f9; }
+        .table-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .table-scroll::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- Header Navigation -->
+    <nav class="bg-navy-900 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center space-x-3">
+                    <span class="text-2xl">🤺</span>
+                    <span class="font-bold text-xl tracking-tight">AELA | Data Dashboard</span>
+                </div>
+                <div class="hidden md:flex space-x-6 text-sm font-medium">
+                    <a href="#kpis" class="hover:text-gold transition">Resumen</a>
+                    <a href="#analytics" class="hover:text-gold transition">Análisis Gráfico</a>
+                    <a href="#projections" class="hover:text-gold transition">Proyecciones</a>
+                    <a href="#database" class="hover:text-gold transition">Base de Datos</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12 w-full">
+
+        <!-- Header Titles -->
+        <header class="text-center space-y-4">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-navy-900 tracking-tight">Desempeño Deportivo Lara</h1>
+            <h2 class="text-xl text-slate-600 font-light">Campeonato Nacional Infantil y Precadete 2025 - 2026</h2>
+            <p class="max-w-3xl mx-auto text-slate-500 mt-4">
+                Este panel interactivo traduce el informe de auditoría cruzada de la Federación Venezolana de Esgrima en insights explorables. 
+                Descubra la efectividad técnica, la distribución por armas y la conformación del semillero deportivo de los 38 atletas del estado Lara.
+            </p>
+        </header>
+
+        <!-- SECTION: KPIs -->
+        <section id="kpis" class="space-y-4 scroll-mt-20">
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                <h3 class="text-2xl font-bold text-navy-800 border-b pb-2 mb-4">🏆 Resumen General de Logros</h3>
+                <p class="text-slate-600 mb-6">
+                    Esta sección presenta los indicadores clave de rendimiento (KPIs) a nivel macro. Permite entender de un vistazo el éxito general de la delegación larense, destacando el volumen de medallas y la eficiencia competitiva.
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Total Medals -->
+                    <div class="bg-gradient-to-br from-navy-800 to-navy-900 text-white rounded-xl p-6 shadow-md transform hover:-translate-y-1 transition duration-300">
+                        <div class="text-sm font-medium text-slate-300 uppercase tracking-wider">Total Medallas</div>
+                        <div class="text-5xl font-black mt-2">18</div>
+                        <div class="text-sm mt-2 font-light">45% de Efectividad Técnica</div>
+                    </div>
+                    <!-- Gold -->
+                    <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm flex flex-col justify-center items-center transform hover:-translate-y-1 transition duration-300">
+                        <div class="text-4xl mb-2">🥇</div>
+                        <div class="text-3xl font-bold text-slate-800">4</div>
+                        <div class="text-sm text-slate-500 font-medium uppercase tracking-wider">Oros</div>
+                    </div>
+                    <!-- Silver -->
+                    <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm flex flex-col justify-center items-center transform hover:-translate-y-1 transition duration-300">
+                        <div class="text-4xl mb-2">🥈</div>
+                        <div class="text-3xl font-bold text-slate-800">4</div>
+                        <div class="text-sm text-slate-500 font-medium uppercase tracking-wider">Platas</div>
+                    </div>
+                    <!-- Bronze -->
+                    <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm flex flex-col justify-center items-center transform hover:-translate-y-1 transition duration-300">
+                        <div class="text-4xl mb-2">🥉</div>
+                        <div class="text-3xl font-bold text-slate-800">10</div>
+                        <div class="text-sm text-slate-500 font-medium uppercase tracking-wider">Bronces</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: Analytics Charts -->
+        <section id="analytics" class="space-y-4 scroll-mt-20">
+            <h3 class="text-2xl font-bold text-navy-800 border-b border-slate-300 pb-2">📊 Análisis de Eficiencia Técnica</h3>
+            <p class="text-slate-600 mb-6">
+                Explore interactivamente cómo se distribuyen los logros y la participación en el estado. Estas gráficas revelan el equilibrio entre las distintas armas, el fuerte liderazgo femenino en el medallero y el impacto de convocatoria de cada club. Pase el cursor sobre las gráficas para ver detalles.
+            </p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Chart 1: Medals by Weapon -->
+                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col">
+                    <h4 class="text-lg font-bold text-slate-700 mb-2 text-center">Medallas por Arma</h4>
+                    <p class="text-xs text-slate-500 text-center mb-4">Liderazgo equilibrado con ligera ventaja en Espada.</p>
+                    <div class="chart-container flex-grow">
+                        <canvas id="weaponChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 2: Medals by Gender -->
+                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col">
+                    <h4 class="text-lg font-bold text-slate-700 mb-2 text-center">Liderazgo Femenino (Medallas)</h4>
+                    <p class="text-xs text-slate-500 text-center mb-4">Distribución de las 18 medallas por género.</p>
+                    <div class="chart-container flex-grow">
+                        <canvas id="genderChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart 3: Athletes by Club -->
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm mt-8">
+                <h4 class="text-lg font-bold text-slate-700 mb-2 text-center">Impacto de Convocatoria por Club</h4>
+                <p class="text-xs text-slate-500 text-center mb-4">Total de atletas registrados por entidad deportiva (Medallistas + Semillero).</p>
+                <div class="chart-container" style="max-height: 450px;">
+                    <canvas id="clubChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: Projections & Insights -->
+        <section id="projections" class="space-y-4 scroll-mt-20">
+            <h3 class="text-2xl font-bold text-navy-800 border-b border-slate-300 pb-2">📈 Proyecciones Estratégicas Ciclo 25-26</h3>
+            <p class="text-slate-600 mb-6">
+                Conclusiones extraídas del análisis de la data competitiva. Esta sección ofrece recomendaciones clave para la Asociación, orientadas a mantener el éxito y mejorar las áreas de transición técnica.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-xl border-l-4 border-gold shadow-sm">
+                    <div class="text-3xl mb-3">⭐</div>
+                    <h4 class="font-bold text-slate-800 text-lg mb-2">Consolidación Élite</h4>
+                    <p class="text-sm text-slate-600">Atletas como <strong>Silvana García</strong> (2 medallas) y <strong>Juan Torrealba</strong> (Oro) se perfilan como pilares absolutos para la selección estadal juvenil, requiriendo apoyo logístico prioritario.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl border-l-4 border-navy-800 shadow-sm">
+                    <div class="text-3xl mb-3">🔄</div>
+                    <h4 class="font-bold text-slate-800 text-lg mb-2">Transición Precadete</h4>
+                    <p class="text-sm text-slate-600">Se identifica una oportunidad de mejora en la retención. Es vital fortalecer el acompañamiento técnico de los atletas que pasan de la categoría Infantil B a la exigente Precadete.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl border-l-4 border-emerald-500 shadow-sm">
+                    <div class="text-3xl mb-3">🌱</div>
+                    <h4 class="font-bold text-slate-800 text-lg mb-2">Potencial Semillero</h4>
+                    <p class="text-sm text-slate-600">Con <strong>13 atletas "Mini"</strong> en formación activa, Lara garantiza la renovación generacional. Clubes como Esgrima Cabudare y Jacinto Lara son vitales en esta etapa.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: Interactive Database -->
+        <section id="database" class="space-y-4 scroll-mt-20 pb-12">
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                <h3 class="text-2xl font-bold text-navy-800 border-b border-slate-200 pb-2 mb-4">🗂️ Base de Datos Interactiva de Atletas</h3>
+                <p class="text-slate-600 mb-6">
+                    Audite y explore el registro oficial de los 38 atletas de la delegación larense. Utilice los controles desplegables para filtrar la información por club o por arma. La tabla se actualizará instantáneamente.
+                </p>
+
+                <!-- Filters -->
+                <div class="flex flex-col md:flex-row gap-4 mb-6 bg-slate-50 p-4 rounded-lg border border-slate-200">
+                    <div class="flex-1">
+                        <label for="filterClub" class="block text-sm font-medium text-slate-700 mb-1">Filtrar por Club / Entrenador</label>
+                        <select id="filterClub" class="w-full bg-white border border-slate-300 rounded-md py-2 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-navy-800">
+                            <option value="all">Todos los Clubes</option>
+                            <option value="Esgrima Cabudare (Tibisay Reinoso)">Esgrima Cabudare (Sable - T. Reinoso)</option>
+                            <option value="Esgrima Cabudare (Josefina Escalona)">Esgrima Cabudare (Florete - J. Escalona)</option>
+                            <option value="Esgrima Barquisimeto">Esgrima Barquisimeto (T. Reinoso)</option>
+                            <option value="Club de Armas Jacinto Lara">Club de Armas Jacinto Lara (M. Heredia)</option>
+                            <option value="Club Fencing Leal">Club Fencing Leal (A. Leal)</option>
+                            <option value="Team Sable Lara">Team Sable Lara (I. Pinzón)</option>
+                            <option value="Club Simón Bolívar">Club Simón Bolívar (S. Torres)</option>
+                            <option value="Fencing Club">Fencing Club (M. Camacaro)</option>
+                        </select>
+                    </div>
+                    <div class="flex-1">
+                        <label for="filterWeapon" class="block text-sm font-medium text-slate-700 mb-1">Filtrar por Arma</label>
+                        <select id="filterWeapon" class="w-full bg-white border border-slate-300 rounded-md py-2 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-navy-800">
+                            <option value="all">Todas las Armas</option>
+                            <option value="Espada">Espada</option>
+                            <option value="Florete">Florete</option>
+                            <option value="Sable">Sable</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Table -->
+                <div class="overflow-x-auto table-scroll rounded-lg border border-slate-200">
+                    <table class="min-w-full divide-y divide-slate-200">
+                        <thead class="bg-navy-900 text-white">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider">Atleta</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider">Club / Entrenador</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider">Categoría</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider">Arma</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider">Estatus / Resultado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="athleteTableBody" class="bg-white divide-y divide-slate-200 text-sm">
+                            <!-- Rows rendered via JS -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="mt-4 text-sm text-slate-500 flex justify-between items-center">
+                    <span id="rowCountDisplay">Mostrando 38 atletas</span>
+                    <span class="text-xs">Fuente: Auditoría Pagos/Arbitraje FVE 2026</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-800 text-slate-400 py-6 text-center text-sm">
+        <p>AELA - Asociación de Esgrima del Estado Lara &copy; 2026</p>
+        <p class="text-xs mt-1">TEPUY All rights reserved © Copyright 2026 - TEPUY</p>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // --- 1. DATA STORAGE ---
+        const athletes = [
+            // Cabudare (Tibisay) - Sable
+            { name: "Silvana García", club: "Esgrima Cabudare (Tibisay Reinoso)", cat: "Inf. A / B", weapon: "Sable", status: "Medallista (🥇🥈)" },
+            { name: "Edrick González", club: "Esgrima Cabudare (Tibisay Reinoso)", cat: "Inf. A / Mini", weapon: "Sable", status: "Medallista (🥉)" },
+            { name: "Luciana Cruz", club: "Esgrima Cabudare (Tibisay Reinoso)", cat: "Inf. A / Mini", weapon: "Sable", status: "Medallista (🥉)" },
+            { name: "Ana Pérez", club: "Esgrima Cabudare (Tibisay Reinoso)", cat: "Inf. A / Mini", weapon: "Sable", status: "Participación" },
+            { name: "Joaquín Linarez", club: "Esgrima Cabudare (Tibisay Reinoso)", cat: "Inf. A / B", weapon: "Sable", status: "Participación" },
+            { name: "Alejandro Rodríguez", club: "Esgrima Cabudare (Tibisay Reinoso)", cat: "Inf. B", weapon: "Sable", status: "Participación" },
+            
+            // Cabudare (Josefina) - Florete
+            { name: "Elisa Figueredo", club: "Esgrima Cabudare (Josefina Escalona)", cat: "Inf. A / B", weapon: "Florete", status: "Medallista (🥈)" },
+            { name: "Geronimo Barrios", club: "Esgrima Cabudare (Josefina Escalona)", cat: "Mini", weapon: "Florete", status: "Participación" },
+            { name: "Joaquín Pérez", club: "Esgrima Cabudare (Josefina Escalona)", cat: "Infantil", weapon: "Florete", status: "Participación" },
+            { name: "César Pérez", club: "Esgrima Cabudare (Josefina Escalona)", cat: "Precadete", weapon: "Florete", status: "Participación" },
+            { name: "Perla Cruz Monagas", club: "Esgrima Cabudare (Josefina Escalona)", cat: "Inf. A / B", weapon: "Florete", status: "Participación" },
+            
+            // Barquisimeto (Tibisay)
+            { name: "Oriana Sequera", club: "Esgrima Barquisimeto", cat: "Infantil A / Mini", weapon: "Sable", status: "Medallista (🥉)" },
+            { name: "Axel Mejías", club: "Esgrima Barquisimeto", cat: "Mini", weapon: "Sable", status: "Participación" },
+            { name: "Franki Mejias", club: "Esgrima Barquisimeto", cat: "Inf. A / B", weapon: "Sable", status: "Participación" },
+
+            // Club de Armas (Marlene)
+            { name: "Juan Torrealba", club: "Club de Armas Jacinto Lara", cat: "Inf. B / Pre", weapon: "Espada", status: "Medallista (🥇)" },
+            { name: "Dagna Heredia", club: "Club de Armas Jacinto Lara", cat: "Inf. B", weapon: "Espada", status: "Medallista (🥈)" },
+            { name: "Marcelo Freitez", club: "Club de Armas Jacinto Lara", cat: "Inf. B", weapon: "Espada", status: "Medallista (🥉)" },
+            { name: "Sofía Torres", club: "Club de Armas Jacinto Lara", cat: "Inf. B", weapon: "Espada", status: "Medallista (🥉)" },
+            { name: "Arturo Longa", club: "Club de Armas Jacinto Lara", cat: "Inf. A", weapon: "Espada", status: "Medallista (🥉)" },
+            { name: "Luciana Longa", club: "Club de Armas Jacinto Lara", cat: "Inf. A", weapon: "Espada", status: "Medallista (🥉)" },
+            { name: "Ximena Sofía Velasco Giménez", club: "Club de Armas Jacinto Lara", cat: "Infantil A", weapon: "Espada", status: "Participación" },
+            { name: "Brithany Sánchez", club: "Club de Armas Jacinto Lara", cat: "Infantil B", weapon: "Espada", status: "Participación" },
+            { name: "Camila Lucia Baez Valenzuela", club: "Club de Armas Jacinto Lara", cat: "Inf. / Pre", weapon: "Espada", status: "Participación" },
+            { name: "Merari Andreina Hurtado Sequera", club: "Club de Armas Jacinto Lara", cat: "Inf. / Pre", weapon: "Espada", status: "Participación" },
+            { name: "Américo Becerra", club: "Club de Armas Jacinto Lara", cat: "Inf. / Pre", weapon: "Espada", status: "Participación" },
+            { name: "Liesus Reinoso", club: "Club de Armas Jacinto Lara", cat: "Mini", weapon: "Espada", status: "Participación" },
+            { name: "Emilia Freitez", club: "Club de Armas Jacinto Lara", cat: "Mini", weapon: "Espada", status: "Participación" },
+            { name: "Alessia Villanueva", club: "Club de Armas Jacinto Lara", cat: "Mini", weapon: "Espada", status: "Participación" },
+            { name: "Fernanda Castillo", club: "Club de Armas Jacinto Lara", cat: "Mini", weapon: "Espada", status: "Participación" },
+
+            // Fencing Leal (Antonio)
+            { name: "Enmanuel Torres", club: "Club Fencing Leal", cat: "Inf. B", weapon: "Florete", status: "Medallista (🥇)" },
+            { name: "Carlota Alvarado", club: "Club Fencing Leal", cat: "Inf. B", weapon: "Florete", status: "Medallista (🥈)" },
+            { name: "Dagmary Reyes", club: "Club Fencing Leal", cat: "Inf. B", weapon: "Florete", status: "Medallista (🥉)" },
+            { name: "Ericka Ordóñez", club: "Club Fencing Leal", cat: "Inf. B", weapon: "Florete", status: "Medallista (🥉)" },
+            { name: "Estrella Dugarte", club: "Club Fencing Leal", cat: "Mini", weapon: "Florete", status: "Participación" },
+
+            // Team Sable Lara (Iznardo)
+            { name: "Leiner Alvarado", club: "Team Sable Lara", cat: "Precadete", weapon: "Sable", status: "Medallista (🥇)" },
+            { name: "Miranda Parra", club: "Team Sable Lara", cat: "Mini", weapon: "Sable", status: "Participación" },
+
+            // Simón Bolívar (Sandra)
+            { name: "Aranza Perez", club: "Club Simón Bolívar", cat: "Precadete", weapon: "Espada", status: "Participación" },
+
+            // Fencing Club (Miguel)
+            { name: "Mary Camacaro", club: "Fencing Club", cat: "Precadete", weapon: "Espada", status: "Medallista (🥉)" }
+        ];
+
+        // --- 2. TABLE RENDERING & FILTERING ---
+        const tableBody = document.getElementById('athleteTableBody');
+        const filterClub = document.getElementById('filterClub');
+        const filterWeapon = document.getElementById('filterWeapon');
+        const rowCountDisplay = document.getElementById('rowCountDisplay');
+
+        function renderTable() {
+            const clubVal = filterClub.value;
+            const weaponVal = filterWeapon.value;
+            
+            tableBody.innerHTML = '';
+            let count = 0;
+
+            athletes.forEach(athlete => {
+                const matchClub = clubVal === 'all' || athlete.club === clubVal;
+                const matchWeapon = weaponVal === 'all' || athlete.weapon === weaponVal;
+
+                if (matchClub && matchWeapon) {
+                    count++;
+                    const isMedalist = athlete.status.includes('Medallista');
+                    const rowClass = isMedalist ? 'bg-amber-50 hover:bg-amber-100' : 'hover:bg-slate-50';
+                    const statusClass = isMedalist ? 'text-amber-700 font-bold' : 'text-slate-500';
+
+                    const row = `
+                        <tr class="transition ${rowClass}">
+                            <td class="px-6 py-4 whitespace-nowrap font-medium text-slate-800">${athlete.name}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-slate-600">${athlete.club}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-slate-600">
+                                <span class="px-2 py-1 bg-slate-100 rounded text-xs">${athlete.cat}</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap font-semibold text-navy-800">${athlete.weapon}</td>
+                            <td class="px-6 py-4 whitespace-nowrap ${statusClass}">${athlete.status}</td>
+                        </tr>
+                    `;
+                    tableBody.innerHTML += row;
+                }
+            });
+
+            rowCountDisplay.textContent = `Mostrando ${count} atleta(s)`;
+        }
+
+        // Event Listeners for filters
+        filterClub.addEventListener('change', renderTable);
+        filterWeapon.addEventListener('change', renderTable);
+
+
+        // --- 3. CHARTS RENDERING (Chart.js) ---
+        function initCharts() {
+            // Chart 1: Medals by Weapon (Espada 7, Sable 6, Florete 5)
+            const ctxWeapon = document.getElementById('weaponChart').getContext('2d');
+            new Chart(ctxWeapon, {
+                type: 'bar',
+                data: {
+                    labels: ['Espada', 'Sable', 'Florete'],
+                    datasets: [{
+                        label: 'Total Medallas',
+                        data: [7, 6, 5],
+                        backgroundColor: [
+                            'rgba(30, 58, 138, 0.8)', // navy
+                            'rgba(251, 191, 36, 0.8)', // gold
+                            'rgba(156, 163, 175, 0.8)' // silver
+                        ],
+                        borderColor: [
+                            'rgba(30, 58, 138, 1)',
+                            'rgba(251, 191, 36, 1)',
+                            'rgba(156, 163, 175, 1)'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { 
+                            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                            padding: 10
+                        }
+                    },
+                    scales: {
+                        y: { beginAtZero: true, max: 8, ticks: { stepSize: 1 } }
+                    }
+                }
+            });
+
+            // Chart 2: Medals by Gender (Femenino 11, Masculino 7)
+            const ctxGender = document.getElementById('genderChart').getContext('2d');
+            new Chart(ctxGender, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Femenino (61%)', 'Masculino (39%)'],
+                    datasets: [{
+                        data: [11, 7],
+                        backgroundColor: [
+                            'rgba(30, 58, 138, 0.9)', // navy
+                            'rgba(148, 163, 184, 0.6)' // light slate
+                        ],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' },
+                        tooltip: { backgroundColor: 'rgba(15, 23, 42, 0.9)' }
+                    },
+                    cutout: '65%'
+                }
+            });
+
+            // Chart 3: Athletes by Club
+            const ctxClub = document.getElementById('clubChart').getContext('2d');
+            new Chart(ctxClub, {
+                type: 'bar', // Using horizontal bar
+                data: {
+                    labels: [
+                        'Club de Armas (15)', 
+                        'Esgrima Cabudare (11)', 
+                        'Club Fencing Leal (5)', 
+                        'Esgrima Barquisimeto (3)', 
+                        'Team Sable Lara (2)', 
+                        'Simón Bolívar (1)', 
+                        'Fencing Club (1)'
+                    ],
+                    datasets: [{
+                        label: 'Atletas Registrados',
+                        data: [15, 11, 5, 3, 2, 1, 1],
+                        backgroundColor: 'rgba(30, 58, 138, 0.7)',
+                        borderColor: 'rgba(30, 58, 138, 1)',
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    indexAxis: 'y', // Makes the bar chart horizontal
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { backgroundColor: 'rgba(15, 23, 42, 0.9)' }
+                    },
+                    scales: {
+                        x: { beginAtZero: true, max: 16, ticks: { stepSize: 2 } }
+                    }
+                }
+            });
+        }
+
+        // --- 4. INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderTable();
+            initCharts();
+        });
+    </script>
+</body>
+</html>
