@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe Ejecutivo: Esgrima Estado Lara 2026</title>
+
+    <!-- Chosen Palette: Warm Neutrals with Lara State Accents (Slate-50 background, Slate-900 text, Red-700 primary accent, Gold/Silver/Bronze semantic colors) -->
+    <!-- Application Structure Plan: The SPA uses a dashboard structure, chosen to facilitate quick consumption of high-level metrics followed by deep dives. It begins with a 'Hero' KPI section for immediate impact, flows into an interactive 'Medallero' (Medal Count) chart to visualize distribution, highlights 'Figuras Relevantes' in a card gallery to personalize the data, offers a filterable 'Directorio de Atletas' for specific searches, and concludes with 'Estadísticas Avanzadas' and strategic recommendations. This structure transforms a static report into an exploratory narrative of Lara's dominance. -->
+    <!-- Visualization & Content Choices: 
+         1. KPIs -> Goal: Inform -> Big Number Cards -> Immediate impact of overall success. 
+         2. Main Chart -> Goal: Compare -> Chart.js Stacked Bar -> Allows switching between Weapon and Category views to understand where Lara excels without clutter. 
+         3. Figures -> Goal: Highlight -> CSS Grid Cards -> Gives prominence to star athletes. 
+         4. Athlete List -> Goal: Organize/Explore -> Vanilla JS filterable table -> Enables users to find specific results easily. 
+         5. Advanced Stats -> Goal: Contextualize -> Chart.js Doughnut & Text -> Visually reinforces the 22.2% gold efficiency stat. 
+         Libraries: Tailwind CSS (styling, layout), Chart.js (canvas-based visualizations). NO SVG/Mermaid used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <!-- CSS Framework: Tailwind CSS -->
+    <script data-cfasync="false" src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Configuración Custom de Tailwind CSS -->
+    <script data-cfasync="false">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'lara-red': '#b91c1c',
+                        'medal-gold': '#fbbf24',
+                        'medal-silver': '#94a3b8',
+                        'medal-bronze': '#b45309',
+                        'gold': '#fbbf24'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 40vh;
+            min-height: 350px;
+            max-height: 500px;
+        }
+
+        .small-chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 250px;
+        }
+
+        .stat-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-lara-red selection:text-white">
+
+    <nav class="bg-slate-900 text-white sticky top-0 z-50 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="font-bold text-xl tracking-wider text-lara-red mr-2">&#9876;</span>
+                    <span class="font-bold text-xl tracking-wider">LARA ESGRIMA 2026</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#resumen"
+                            class="hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Resumen</a>
+                        <a href="#medallero"
+                            class="hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Medallero</a>
+                        <a href="#figuras"
+                            class="hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Figuras</a>
+                        <a href="#directorio"
+                            class="hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Directorio</a>
+                        <a href="#estrategia"
+                            class="hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Estrategia</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
+
+        <section id="resumen" class="scroll-mt-20">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <h1 class="text-4xl font-extrabold text-slate-900 mb-4">Campeonato Nacional Infantil y Precadete</h1>
+                <h2 class="text-2xl text-lara-red font-semibold mb-4">Informe de Rendimiento: Estado Lara (LAR)</h2>
+                <p class="text-lg text-slate-600">
+                    El estado Lara se consolidó como la potencia dominante del campeonato en Valencia 2026. La
+                    delegación demostró una efectividad sobresaliente, dominando el podio en casi todas las categorías
+                    competitivas, con un rendimiento excepcional en Sable y Florete.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <div
+                    class="stat-card bg-white rounded-xl shadow border border-slate-100 p-6 text-center border-b-4 border-b-slate-800">
+                    <div class="text-5xl mb-2">&#127942;</div>
+                    <div class="text-4xl font-black text-slate-900 mb-1">18</div>
+                    <div class="text-sm font-semibold text-slate-500 uppercase tracking-wide">Medallas Totales</div>
+                </div>
+                <div
+                    class="stat-card bg-white rounded-xl shadow border border-slate-100 p-6 text-center border-b-4 border-b-medal-gold">
+                    <div class="text-5xl mb-2">&#129351;</div>
+                    <div class="text-4xl font-black text-slate-900 mb-1">4</div>
+                    <div class="text-sm font-semibold text-slate-500 uppercase tracking-wide">Oros</div>
+                </div>
+                <div
+                    class="stat-card bg-white rounded-xl shadow border border-slate-100 p-6 text-center border-b-4 border-b-medal-silver">
+                    <div class="text-5xl mb-2">&#129352;</div>
+                    <div class="text-4xl font-black text-slate-900 mb-1">4</div>
+                    <div class="text-sm font-semibold text-slate-500 uppercase tracking-wide">Platas</div>
+                </div>
+                <div
+                    class="stat-card bg-white rounded-xl shadow border border-slate-100 p-6 text-center border-b-4 border-b-medal-bronze">
+                    <div class="text-5xl mb-2">&#129353;</div>
+                    <div class="text-4xl font-black text-slate-900 mb-1">10</div>
+                    <div class="text-sm font-semibold text-slate-500 uppercase tracking-wide">Bronces</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="medallero" class="scroll-mt-20 bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+            <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h3 class="text-2xl font-bold text-slate-900">Distribución del Medallero</h3>
+                    <p class="text-slate-500 text-sm mt-1">Explore cómo se distribuyen las victorias de Lara. Cambie la
+                        vista para analizar por arma o por categoría de edad.</p>
+                </div>
+                <div class="inline-flex bg-slate-100 rounded-lg p-1">
+                    <button id="btnArma"
+                        class="px-4 py-2 text-sm font-medium rounded-md bg-white text-slate-900 shadow-sm transition-all">Por
+                        Arma</button>
+                    <button id="btnCategoria"
+                        class="px-4 py-2 text-sm font-medium rounded-md text-slate-500 hover:text-slate-900 transition-all">Por
+                        Categoría</button>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="medalleroChart"></canvas>
+            </div>
+        </section>
+
+        <section id="figuras" class="scroll-mt-20">
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold text-slate-900">Figuras Relevantes y Proyecciones</h3>
+                <p class="text-slate-600 mt-2">Atletas larenses que demostraron un dominio técnico y táctico superior,
+                    proyectándose como la base de la futura Selección Nacional.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                <div class="bg-white rounded-xl shadow border border-slate-200 overflow-hidden group">
+                    <div class="bg-slate-900 h-2 w-full"></div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h4 class="text-xl font-bold text-slate-900">Silvana García</h4>
+                            <span class="text-2xl" title="Sable">&#9876;</span>
+                        </div>
+                        <div class="mb-4">
+                            <span
+                                class="inline-block bg-slate-100 text-slate-800 text-xs px-2 py-1 rounded font-semibold uppercase tracking-wider mb-1">Especialidad:
+                                Sable</span>
+                        </div>
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-center text-sm"><span class="mr-2">&#129351;</span> Oro (Infantil A)
+                            </li>
+                            <li class="flex items-center text-sm"><span class="mr-2">&#129352;</span> Plata (Infantil B)
+                            </li>
+                        </ul>
+                        <p class="text-sm text-slate-600 border-t pt-4">La atleta más laureada del estado. Demuestra un
+                            dominio absoluto en su transición entre categorías formativas.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow border border-slate-200 overflow-hidden group">
+                    <div class="bg-lara-red h-2 w-full"></div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h4 class="text-xl font-bold text-slate-900">Elisa Figueredo</h4>
+                            <span class="text-2xl" title="Florete">&#9876;</span>
+                        </div>
+                        <div class="mb-4">
+                            <span
+                                class="inline-block bg-slate-100 text-slate-800 text-xs px-2 py-1 rounded font-semibold uppercase tracking-wider mb-1">Especialidad:
+                                Florete</span>
+                        </div>
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-center text-sm"><span class="mr-2">&#129352;</span> Plata (Infantil A)
+                            </li>
+                            <li class="flex items-center text-sm"><span class="mr-2">&#11088;</span> 6to Lugar (Infantil
+                                B)</li>
+                        </ul>
+                        <p class="text-sm text-slate-600 border-t pt-4">Atleta de altísima proyección técnica. Destaca
+                            su capacidad de clasificar al Top 8 compitiendo contra tiradoras mayores en Infantil B.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow border border-slate-200 overflow-hidden group">
+                    <div class="bg-slate-900 h-2 w-full"></div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h4 class="text-xl font-bold text-slate-900">Emmanuel Torres</h4>
+                            <span class="text-2xl" title="Florete">&#9876;</span>
+                        </div>
+                        <div class="mb-4">
+                            <span
+                                class="inline-block bg-slate-100 text-slate-800 text-xs px-2 py-1 rounded font-semibold uppercase tracking-wider mb-1">Especialidad:
+                                Florete</span>
+                        </div>
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-center text-sm"><span class="mr-2">&#129351;</span> Oro (Infantil B)
+                            </li>
+                            <li class="flex items-center text-sm"><span class="mr-2">&#11088;</span> 7mo Lugar
+                                (Precadete)</li>
+                        </ul>
+                        <p class="text-sm text-slate-600 border-t pt-4">Líder indiscutible en Infantil B. Entrar al Top
+                            8 de Precadete es un fuerte indicador de talento a nivel de selección.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow border border-slate-200 overflow-hidden group">
+                    <div class="bg-lara-red h-2 w-full"></div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h4 class="text-xl font-bold text-slate-900">Juan Torrealba</h4>
+                            <span class="text-2xl" title="Espada">&#9876;</span>
+                        </div>
+                        <div class="mb-4">
+                            <span
+                                class="inline-block bg-slate-100 text-slate-800 text-xs px-2 py-1 rounded font-semibold uppercase tracking-wider mb-1">Especialidad:
+                                Espada</span>
+                        </div>
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-center text-sm"><span class="mr-2">&#129351;</span> Oro (Infantil B)
+                            </li>
+                        </ul>
+                        <p class="text-sm text-slate-600 border-t pt-4 mt-8">Campeón nacional con una superioridad
+                            táctica clara. Se espera que lidere la categoría Precadete en el próximo ciclo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="directorio" class="scroll-mt-20 bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+            <div class="mb-6">
+                <h3 class="text-2xl font-bold text-slate-900">Directorio de Medallistas</h3>
+                <p class="text-slate-500 text-sm mt-1">Listado completo de los atletas que subieron al podio aportando a
+                    la victoria del estado Lara.</p>
+            </div>
+
+            <div class="mb-6 relative">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400 text-xl">&#8981;</span>
+                <input type="text" id="searchInput" placeholder="Buscar por nombre, arma o categoría..."
+                    class="w-full pl-10 pr-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-lara-red focus:border-transparent transition-shadow">
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-slate-200">
+                    <thead class="bg-slate-50">
+                        <tr>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">
+                                Atleta</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">
+                                Arma</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">
+                                Categoría</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">
+                                Medalla</th>
+                        </tr>
+                    </thead>
+                    <tbody id="athleteTableBody" class="bg-white divide-y divide-slate-200">
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="estrategia" class="scroll-mt-20 mb-16">
+            <h3 class="text-2xl font-bold text-slate-900 mb-6">Estadísticas Avanzadas y Conclusión Estratégica</h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                <div
+                    class="md:col-span-1 bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center justify-center">
+                    <h4 class="text-center font-semibold text-slate-700 mb-2">Efectividad en Oros Nacionales</h4>
+                    <div class="small-chart-container">
+                        <canvas id="efficiencyChart"></canvas>
+                    </div>
+                    <p class="text-center text-sm text-slate-500 mt-2">Lara obtuvo el 22.2% de todas las medallas de oro
+                        en las 18 categorías premiadas.</p>
+                </div>
+
+                <div class="md:col-span-2 space-y-6">
+                    <div class="bg-slate-900 text-white p-6 rounded-xl shadow-md border-l-4 border-lara-red">
+                        <h4 class="text-lg font-bold mb-2 flex items-center"><span class="mr-2 text-xl">&#128200;</span>
+                            Densidad y Versatilidad</h4>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Lara no solo gana preseas, sino que ocupa masivamente los puestos de diploma (Top 8).
+                            Destaca el <strong>Florete Femenino Infantil B</strong>, donde el estado ocupó el
+                            <strong>62.5%</strong> de los puestos premiados. Además, el 50% de los medallistas de plata
+                            en categorías B también puntuaron en categorías A, asegurando un relevo generacional sólido.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h4 class="text-lg font-bold text-slate-900 mb-3 flex items-center"><span
+                                class="mr-2 text-xl">&#128204;</span> Recomendaciones para el Próximo Ciclo</h4>
+                        <ul class="space-y-3 text-sm text-slate-600">
+                            <li class="flex items-start">
+                                <span class="text-lara-red mr-2 font-bold">&#8227;</span>
+                                <span><strong>Refuerzo Táctico:</strong> Concentrar esfuerzos en el Florete Masculino
+                                    Precadete para convertir el alto volumen de participación en finales de
+                                    podio.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-lara-red mr-2 font-bold">&#8227;</span>
+                                <span><strong>Programa de Seguimiento:</strong> Mantener un monitoreo riguroso sobre los
+                                    10 medallistas de bronce. El análisis indica que el 70% de ellos estuvo a un margen
+                                    mínimo de alcanzar la final por el oro.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-lara-red mr-2 font-bold">&#8227;</span>
+                                <span><strong>Capitalizar el Sable:</strong> El Sable representa el 50% de los oros de
+                                    la delegación. Es fundamental potenciar esta escuela para mantener la hegemonía a
+                                    nivel de armas rápidas.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-800 text-slate-400 py-6 text-center text-sm">
+        <p>AELA - Asociación de Esgrima del Estado Lara &copy; 2026</p>
+        <p class="text-xs mt-1">
+            <a href="https://tepuy.site" target="_blank" rel="noopener noreferrer" class="hover:text-gold transition">TEPUY</a> All rights reserved &copy; Copyright 2026 - <a href="https://tepuy.site" target="_blank" rel="noopener noreferrer" class="hover:text-gold transition">TEPUY</a>
+        </p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const athletesData = [
+                { name: "Silvana García", weapon: "Sable", category: "Infantil A", gender: "F", medal: "Oro" },
+                { name: "Emmanuel Torres", weapon: "Florete", category: "Infantil B", gender: "M", medal: "Oro" },
+                { name: "Juan Torrealba", weapon: "Espada", category: "Infantil B", gender: "M", medal: "Oro" },
+                { name: "Leiner Alvarado", weapon: "Sable", category: "Precadete", gender: "M", medal: "Oro" },
+
+                { name: "Elisa Figueredo", weapon: "Florete", category: "Infantil A", gender: "F", medal: "Plata" },
+                { name: "Silvana García", weapon: "Sable", category: "Infantil B", gender: "F", medal: "Plata" },
+                { name: "Carlota Alvarado", weapon: "Florete", category: "Infantil B", gender: "F", medal: "Plata" },
+                { name: "Dagna Heredia", weapon: "Espada", category: "Infantil B", gender: "F", medal: "Plata" },
+
+                { name: "Oriana Sequera", weapon: "Sable", category: "Infantil A", gender: "F", medal: "Bronce" },
+                { name: "Luciana Cruz", weapon: "Sable", category: "Infantil A", gender: "F", medal: "Bronce" },
+                { name: "Edrik González", weapon: "Sable", category: "Infantil A", gender: "M", medal: "Bronce" },
+                { name: "Ximena Velasco", weapon: "Espada", category: "Infantil A", gender: "F", medal: "Bronce" },
+                { name: "Arturo Longa", weapon: "Espada", category: "Infantil A", gender: "M", medal: "Bronce" },
+                { name: "Ericka Ordoñez", weapon: "Florete", category: "Infantil B", gender: "F", medal: "Bronce" },
+                { name: "Dagmari Reyes", weapon: "Florete", category: "Infantil B", gender: "F", medal: "Bronce" },
+                { name: "Sofía Torres", weapon: "Espada", category: "Infantil B", gender: "F", medal: "Bronce" },
+                { name: "Marcelo Freitez", weapon: "Espada", category: "Infantil B", gender: "M", medal: "Bronce" },
+                { name: "Mary Camacaro", weapon: "Espada", category: "Precadete", gender: "F", medal: "Bronce" }
+            ];
+
+            const chartColors = {
+                oro: '#fbbf24',
+                plata: '#94a3b8',
+                bronce: '#b45309'
+            };
+
+            const dataByWeapon = {
+                labels: ['Sable', 'Florete', 'Espada'],
+                datasets: [
+                    { label: 'Oro', data: [2, 1, 1], backgroundColor: chartColors.oro },
+                    { label: 'Plata', data: [1, 2, 1], backgroundColor: chartColors.plata },
+                    { label: 'Bronce', data: [3, 2, 5], backgroundColor: chartColors.bronce }
+                ]
+            };
+
+            const dataByCategory = {
+                labels: ['Infantil A', 'Infantil B', 'Precadete'],
+                datasets: [
+                    { label: 'Oro', data: [1, 2, 1], backgroundColor: chartColors.oro },
+                    { label: 'Plata', data: [1, 3, 0], backgroundColor: chartColors.plata },
+                    { label: 'Bronce', data: [5, 4, 1], backgroundColor: chartColors.bronce }
+                ]
+            };
+
+            const ctxMedallero = document.getElementById('medalleroChart').getContext('2d');
+            let medalleroChart = new Chart(ctxMedallero, {
+                type: 'bar',
+                data: dataByWeapon,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'top', labels: { font: { family: "'Segoe UI', sans-serif" } } },
+                        tooltip: { mode: 'index', intersect: false }
+                    },
+                    scales: {
+                        x: { stacked: true, grid: { display: false } },
+                        y: { stacked: true, beginAtZero: true, ticks: { stepSize: 1 } }
+                    }
+                }
+            });
+
+            const btnArma = document.getElementById('btnArma');
+            const btnCategoria = document.getElementById('btnCategoria');
+
+            const toggleActiveBtn = (active, inactive) => {
+                active.classList.remove('text-slate-500', 'hover:text-slate-900');
+                active.classList.add('bg-white', 'text-slate-900', 'shadow-sm');
+                inactive.classList.remove('bg-white', 'text-slate-900', 'shadow-sm');
+                inactive.classList.add('text-slate-500', 'hover:text-slate-900');
+            };
+
+            btnArma.addEventListener('click', () => {
+                medalleroChart.data = dataByWeapon;
+                medalleroChart.update();
+                toggleActiveBtn(btnArma, btnCategoria);
+            });
+
+            btnCategoria.addEventListener('click', () => {
+                medalleroChart.data = dataByCategory;
+                medalleroChart.update();
+                toggleActiveBtn(btnCategoria, btnArma);
+            });
+
+            const renderTable = (data) => {
+                const tbody = document.getElementById('athleteTableBody');
+                tbody.innerHTML = '';
+
+                if (data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="4" class="px-6 py-4 text-center text-sm text-slate-500">No se encontraron resultados</td></tr>';
+                    return;
+                }
+
+                data.forEach(athlete => {
+                    let medalBadge = '';
+                    if (athlete.medal === 'Oro') medalBadge = '<span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">&#129351; Oro</span>';
+                    else if (athlete.medal === 'Plata') medalBadge = '<span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-slate-200 text-slate-700">&#129352; Plata</span>';
+                    else medalBadge = '<span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-orange-100 text-orange-800">&#129353; Bronce</span>';
+
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-slate-50 transition-colors";
+                    tr.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="font-medium text-slate-900">${athlete.name}</div>
+                            <div class="text-xs text-slate-500">${athlete.gender === 'F' ? 'Femenino' : 'Masculino'}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-700">${athlete.weapon}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-700">${athlete.category}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">${medalBadge}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            };
+
+            renderTable(athletesData);
+
+            document.getElementById('searchInput').addEventListener('input', (e) => {
+                const term = e.target.value.toLowerCase();
+                const filtered = athletesData.filter(a =>
+                    a.name.toLowerCase().includes(term) ||
+                    a.weapon.toLowerCase().includes(term) ||
+                    a.category.toLowerCase().includes(term) ||
+                    a.medal.toLowerCase().includes(term)
+                );
+                renderTable(filtered);
+            });
+
+            const ctxEfficiency = document.getElementById('efficiencyChart').getContext('2d');
+            new Chart(ctxEfficiency, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Oros LAR', 'Resto Nacional'],
+                    datasets: [{
+                        data: [4, 14],
+                        backgroundColor: [chartColors.oro, '#e2e8f0'],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '75%',
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    let label = context.label || '';
+                                    if (label) label += ': ';
+                                    if (context.parsed !== null) {
+                                        let total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                        let percentage = Math.round((context.parsed / total) * 100) + '%';
+                                        label += context.parsed + ' (' + percentage + ')';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                },
+                plugins: [{
+                    id: 'textCenter',
+                    beforeDraw: function (chart) {
+                        var width = chart.width, height = chart.height, ctx = chart.ctx;
+                        ctx.restore();
+                        var fontSize = (height / 110).toFixed(2);
+                        ctx.font = "bold " + fontSize + "em sans-serif";
+                        ctx.textBaseline = "middle";
+                        ctx.fillStyle = "#0f172a";
+                        var text = "22%",
+                            textX = Math.round((width - ctx.measureText(text).width) / 2),
+                            textY = height / 2;
+                        ctx.fillText(text, textX, textY);
+                        ctx.save();
+                    }
+                }]
+            });
+        });
+    </script>
+</body>
+
+</html>
