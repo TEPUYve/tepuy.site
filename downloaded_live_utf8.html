@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
 
 <head>
@@ -7,7 +7,7 @@
     <title>Informe Ejecutivo: Esgrima Estado Lara 2026</title>
 
     <!-- Chosen Palette: Warm Neutrals with Lara State Accents (Slate-50 background, Slate-900 text, Red-700 primary accent, Gold/Silver/Bronze semantic colors) -->
-    <!-- Application Structure Plan: The SPA uses a dashboard structure, chosen to facilitate quick consumption of high-level metrics followed by deep dives. It begins with a 'Hero' KPI section for immediate impact, flows into an interactive 'Medallero' (Medal Count) chart to visualize distribution, highlights 'Figuras Relevantes' in a card gallery to personalize the data, offers a filterable 'Directorio de Atletas' for specific searches, and concludes with 'Estadísticas Avanzadas' and strategic recommendations. This structure transforms a static report into an exploratory narrative of Lara's dominance. -->
+    <!-- Application Structure Plan: The SPA uses a dashboard structure, chosen to facilitate quick consumption of high-level metrics followed by deep dives. It begins with a 'Hero' KPI section for immediate impact, flows into an interactive 'Medallero' (Medal Count) chart to visualize distribution, highlights 'Figuras Relevantes' in a card gallery to personalize the data, offers a filterable 'Directorio de Atletas' for specific searches, and concludes with 'Estad├¡sticas Avanzadas' and strategic recommendations. This structure transforms a static report into an exploratory narrative of Lara's dominance. -->
     <!-- Visualization & Content Choices: 
          1. KPIs -> Goal: Inform -> Big Number Cards -> Immediate impact of overall success. 
          2. Main Chart -> Goal: Compare -> Chart.js Stacked Bar -> Allows switching between Weapon and Category views to understand where Lara excels without clutter. 
@@ -16,10 +16,12 @@
          5. Advanced Stats -> Goal: Contextualize -> Chart.js Doughnut & Text -> Visually reinforces the 22.2% gold efficiency stat. 
          Libraries: Tailwind CSS (styling, layout), Chart.js (canvas-based visualizations). NO SVG/Mermaid used. -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
     <!-- CSS Framework: Tailwind CSS -->
     <script data-cfasync="false" src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" type="8629850f98752f1d30f77853-text/javascript"></script>
 
-    <!-- Configuración Custom de Tailwind CSS -->
+    <!-- Configuraci├│n Custom de Tailwind CSS -->
     <script data-cfasync="false">
         tailwind.config = {
             theme: {
@@ -35,9 +37,6 @@
             }
         }
     </script>
-
-    <!-- Chart.js for Visualizations -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
         body {
@@ -109,8 +108,8 @@
                 <h1 class="text-4xl font-extrabold text-slate-900 mb-4">Campeonato Nacional Infantil y Precadete</h1>
                 <h2 class="text-2xl text-lara-red font-semibold mb-4">Informe de Rendimiento: Estado Lara (LAR)</h2>
                 <p class="text-lg text-slate-600">
-                    El estado Lara se consolidó como la potencia dominante del campeonato en Valencia 2026. La
-                    delegación demostró una efectividad sobresaliente, dominando el podio en casi todas las categorías
+                    El estado Lara se consolid├│ como la potencia dominante del campeonato en Valencia 2026. La
+                    delegaci├│n demostr├│ una efectividad sobresaliente, dominando el podio en casi todas las categor├¡as
                     competitivas, con un rendimiento excepcional en Sable y Florete.
                 </p>
             </div>
@@ -146,9 +145,9 @@
         <section id="medallero" class="scroll-mt-20 bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
             <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
-                    <h3 class="text-2xl font-bold text-slate-900">Distribución del Medallero</h3>
-                    <p class="text-slate-500 text-sm mt-1">Explore cómo se distribuyen las victorias de Lara. Cambie la
-                        vista para analizar por arma o por categoría de edad.</p>
+                    <h3 class="text-2xl font-bold text-slate-900">Distribuci├│n del Medallero</h3>
+                    <p class="text-slate-500 text-sm mt-1">Explore c├│mo se distribuyen las victorias de Lara. Cambie la
+                        vista para analizar por arma o por categor├¡a de edad.</p>
                 </div>
                 <div class="inline-flex bg-slate-100 rounded-lg p-1">
                     <button id="btnArma"
@@ -156,7 +155,7 @@
                         Arma</button>
                     <button id="btnCategoria"
                         class="px-4 py-2 text-sm font-medium rounded-md text-slate-500 hover:text-slate-900 transition-all">Por
-                        Categoría</button>
+                        Categor├¡a</button>
                 </div>
             </div>
 
@@ -168,8 +167,8 @@
         <section id="figuras" class="scroll-mt-20">
             <div class="mb-8">
                 <h3 class="text-2xl font-bold text-slate-900">Figuras Relevantes y Proyecciones</h3>
-                <p class="text-slate-600 mt-2">Atletas larenses que demostraron un dominio técnico y táctico superior,
-                    proyectándose como la base de la futura Selección Nacional.</p>
+                <p class="text-slate-600 mt-2">Atletas larenses que demostraron un dominio t├®cnico y t├íctico superior,
+                    proyect├índose como la base de la futura Selecci├│n Nacional.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -178,7 +177,7 @@
                     <div class="bg-slate-900 h-2 w-full"></div>
                     <div class="p-6">
                         <div class="flex justify-between items-start mb-4">
-                            <h4 class="text-xl font-bold text-slate-900">Silvana García</h4>
+                            <h4 class="text-xl font-bold text-slate-900">Silvana Garc├¡a</h4>
                             <span class="text-2xl" title="Sable">&#9876;</span>
                         </div>
                         <div class="mb-4">
@@ -192,8 +191,8 @@
                             <li class="flex items-center text-sm"><span class="mr-2">&#129352;</span> Plata (Infantil B)
                             </li>
                         </ul>
-                        <p class="text-sm text-slate-600 border-t pt-4">La atleta más laureada del estado. Demuestra un
-                            dominio absoluto en su transición entre categorías formativas.</p>
+                        <p class="text-sm text-slate-600 border-t pt-4">La atleta m├ís laureada del estado. Demuestra un
+                            dominio absoluto en su transici├│n entre categor├¡as formativas.</p>
                     </div>
                 </div>
 
@@ -215,7 +214,7 @@
                             <li class="flex items-center text-sm"><span class="mr-2">&#11088;</span> 6to Lugar (Infantil
                                 B)</li>
                         </ul>
-                        <p class="text-sm text-slate-600 border-t pt-4">Atleta de altísima proyección técnica. Destaca
+                        <p class="text-sm text-slate-600 border-t pt-4">Atleta de alt├¡sima proyecci├│n t├®cnica. Destaca
                             su capacidad de clasificar al Top 8 compitiendo contra tiradoras mayores en Infantil B.</p>
                     </div>
                 </div>
@@ -238,8 +237,8 @@
                             <li class="flex items-center text-sm"><span class="mr-2">&#11088;</span> 7mo Lugar
                                 (Precadete)</li>
                         </ul>
-                        <p class="text-sm text-slate-600 border-t pt-4">Líder indiscutible en Infantil B. Entrar al Top
-                            8 de Precadete es un fuerte indicador de talento a nivel de selección.</p>
+                        <p class="text-sm text-slate-600 border-t pt-4">L├¡der indiscutible en Infantil B. Entrar al Top
+                            8 de Precadete es un fuerte indicador de talento a nivel de selecci├│n.</p>
                     </div>
                 </div>
 
@@ -259,8 +258,8 @@
                             <li class="flex items-center text-sm"><span class="mr-2">&#129351;</span> Oro (Infantil B)
                             </li>
                         </ul>
-                        <p class="text-sm text-slate-600 border-t pt-4 mt-8">Campeón nacional con una superioridad
-                            táctica clara. Se espera que lidere la categoría Precadete en el próximo ciclo.</p>
+                        <p class="text-sm text-slate-600 border-t pt-4 mt-8">Campe├│n nacional con una superioridad
+                            t├íctica clara. Se espera que lidere la categor├¡a Precadete en el pr├│ximo ciclo.</p>
                     </div>
                 </div>
             </div>
@@ -275,7 +274,7 @@
 
             <div class="mb-6 relative">
                 <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400 text-xl">&#8981;</span>
-                <input type="text" id="searchInput" placeholder="Buscar por nombre, arma o categoría..."
+                <input type="text" id="searchInput" placeholder="Buscar por nombre, arma o categor├¡a..."
                     class="w-full pl-10 pr-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-lara-red focus:border-transparent transition-shadow">
             </div>
 
@@ -291,7 +290,7 @@
                                 Arma</th>
                             <th scope="col"
                                 class="px-6 py-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">
-                                Categoría</th>
+                                Categor├¡a</th>
                             <th scope="col"
                                 class="px-6 py-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">
                                 Medalla</th>
@@ -304,7 +303,7 @@
         </section>
 
         <section id="estrategia" class="scroll-mt-20 mb-16">
-            <h3 class="text-2xl font-bold text-slate-900 mb-6">Estadísticas Avanzadas y Conclusión Estratégica</h3>
+            <h3 class="text-2xl font-bold text-slate-900 mb-6">Estad├¡sticas Avanzadas y Conclusi├│n Estrat├®gica</h3>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
                 <div
@@ -314,7 +313,7 @@
                         <canvas id="efficiencyChart"></canvas>
                     </div>
                     <p class="text-center text-sm text-slate-500 mt-2">Lara obtuvo el 22.2% de todas las medallas de oro
-                        en las 18 categorías premiadas.</p>
+                        en las 18 categor├¡as premiadas.</p>
                 </div>
 
                 <div class="md:col-span-2 space-y-6">
@@ -323,33 +322,33 @@
                             Densidad y Versatilidad</h4>
                         <p class="text-slate-300 text-sm leading-relaxed">
                             Lara no solo gana preseas, sino que ocupa masivamente los puestos de diploma (Top 8).
-                            Destaca el <strong>Florete Femenino Infantil B</strong>, donde el estado ocupó el
-                            <strong>62.5%</strong> de los puestos premiados. Además, el 50% de los medallistas de plata
-                            en categorías B también puntuaron en categorías A, asegurando un relevo generacional sólido.
+                            Destaca el <strong>Florete Femenino Infantil B</strong>, donde el estado ocup├│ el
+                            <strong>62.5%</strong> de los puestos premiados. Adem├ís, el 50% de los medallistas de plata
+                            en categor├¡as B tambi├®n puntuaron en categor├¡as A, asegurando un relevo generacional s├│lido.
                         </p>
                     </div>
 
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
                         <h4 class="text-lg font-bold text-slate-900 mb-3 flex items-center"><span
-                                class="mr-2 text-xl">&#128204;</span> Recomendaciones para el Próximo Ciclo</h4>
+                                class="mr-2 text-xl">&#128204;</span> Recomendaciones para el Pr├│ximo Ciclo</h4>
                         <ul class="space-y-3 text-sm text-slate-600">
                             <li class="flex items-start">
                                 <span class="text-lara-red mr-2 font-bold">&#8227;</span>
-                                <span><strong>Refuerzo Táctico:</strong> Concentrar esfuerzos en el Florete Masculino
-                                    Precadete para convertir el alto volumen de participación en finales de
+                                <span><strong>Refuerzo T├íctico:</strong> Concentrar esfuerzos en el Florete Masculino
+                                    Precadete para convertir el alto volumen de participaci├│n en finales de
                                     podio.</span>
                             </li>
                             <li class="flex items-start">
                                 <span class="text-lara-red mr-2 font-bold">&#8227;</span>
                                 <span><strong>Programa de Seguimiento:</strong> Mantener un monitoreo riguroso sobre los
-                                    10 medallistas de bronce. El análisis indica que el 70% de ellos estuvo a un margen
-                                    mínimo de alcanzar la final por el oro.</span>
+                                    10 medallistas de bronce. El an├ílisis indica que el 70% de ellos estuvo a un margen
+                                    m├¡nimo de alcanzar la final por el oro.</span>
                             </li>
                             <li class="flex items-start">
                                 <span class="text-lara-red mr-2 font-bold">&#8227;</span>
                                 <span><strong>Capitalizar el Sable:</strong> El Sable representa el 50% de los oros de
-                                    la delegación. Es fundamental potenciar esta escuela para mantener la hegemonía a
-                                    nivel de armas rápidas.</span>
+                                    la delegaci├│n. Es fundamental potenciar esta escuela para mantener la hegemon├¡a a
+                                    nivel de armas r├ípidas.</span>
                             </li>
                         </ul>
                     </div>
@@ -360,34 +359,34 @@
     </main>
 
     <footer class="bg-slate-800 text-slate-400 py-6 text-center text-sm">
-        <p>AELA - Asociación de Esgrima del Estado Lara &copy; 2026</p>
+        <p>AELA - Asociaci├│n de Esgrima del Estado Lara &copy; 2026</p>
         <p class="text-xs mt-1">
             <a href="https://tepuy.site" target="_blank" rel="noopener noreferrer" class="hover:text-gold transition">TEPUY</a> All rights reserved &copy; Copyright 2026 - <a href="https://tepuy.site" target="_blank" rel="noopener noreferrer" class="hover:text-gold transition">TEPUY</a>
         </p>
     </footer>
 
-    <script>
+    <script type="8629850f98752f1d30f77853-text/javascript">
         document.addEventListener('DOMContentLoaded', () => {
 
             const athletesData = [
-                { name: "Silvana García", weapon: "Sable", category: "Infantil A", gender: "F", medal: "Oro" },
+                { name: "Silvana Garc├¡a", weapon: "Sable", category: "Infantil A", gender: "F", medal: "Oro" },
                 { name: "Emmanuel Torres", weapon: "Florete", category: "Infantil B", gender: "M", medal: "Oro" },
                 { name: "Juan Torrealba", weapon: "Espada", category: "Infantil B", gender: "M", medal: "Oro" },
                 { name: "Leiner Alvarado", weapon: "Sable", category: "Precadete", gender: "M", medal: "Oro" },
 
                 { name: "Elisa Figueredo", weapon: "Florete", category: "Infantil A", gender: "F", medal: "Plata" },
-                { name: "Silvana García", weapon: "Sable", category: "Infantil B", gender: "F", medal: "Plata" },
+                { name: "Silvana Garc├¡a", weapon: "Sable", category: "Infantil B", gender: "F", medal: "Plata" },
                 { name: "Carlota Alvarado", weapon: "Florete", category: "Infantil B", gender: "F", medal: "Plata" },
                 { name: "Dagna Heredia", weapon: "Espada", category: "Infantil B", gender: "F", medal: "Plata" },
 
                 { name: "Oriana Sequera", weapon: "Sable", category: "Infantil A", gender: "F", medal: "Bronce" },
                 { name: "Luciana Cruz", weapon: "Sable", category: "Infantil A", gender: "F", medal: "Bronce" },
-                { name: "Edrik González", weapon: "Sable", category: "Infantil A", gender: "M", medal: "Bronce" },
+                { name: "Edrik Gonz├ílez", weapon: "Sable", category: "Infantil A", gender: "M", medal: "Bronce" },
                 { name: "Ximena Velasco", weapon: "Espada", category: "Infantil A", gender: "F", medal: "Bronce" },
                 { name: "Arturo Longa", weapon: "Espada", category: "Infantil A", gender: "M", medal: "Bronce" },
-                { name: "Ericka Ordoñez", weapon: "Florete", category: "Infantil B", gender: "F", medal: "Bronce" },
+                { name: "Ericka Ordo├▒ez", weapon: "Florete", category: "Infantil B", gender: "F", medal: "Bronce" },
                 { name: "Dagmari Reyes", weapon: "Florete", category: "Infantil B", gender: "F", medal: "Bronce" },
-                { name: "Sofía Torres", weapon: "Espada", category: "Infantil B", gender: "F", medal: "Bronce" },
+                { name: "Sof├¡a Torres", weapon: "Espada", category: "Infantil B", gender: "F", medal: "Bronce" },
                 { name: "Marcelo Freitez", weapon: "Espada", category: "Infantil B", gender: "M", medal: "Bronce" },
                 { name: "Mary Camacaro", weapon: "Espada", category: "Precadete", gender: "F", medal: "Bronce" }
             ];
@@ -552,6 +551,7 @@
             });
         });
     </script>
-</body>
+<script src="/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="8629850f98752f1d30f77853-|49" defer></script><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9da5f719fd1d37a4',t:'MTc3MzE4MzkzNw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 
 </html>
+
