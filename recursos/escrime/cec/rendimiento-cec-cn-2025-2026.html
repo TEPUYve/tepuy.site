@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte Técnico: Club Esgrima Cabudare · CN 2025-2026</title>
+
+    <!-- Tailwind CSS - data-cfasync="false" evita que Cloudflare lo bloquee/difiera -->
+    <script data-cfasync="false" src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Configuración Custom de Tailwind CSS -->
+    <script data-cfasync="false">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'cec-red': '#b91c1c',
+                        'medal-gold': '#fbbf24',
+                        'medal-silver': '#94a3b8',
+                        'medal-bronze': '#b45309',
+                        'gold': '#fbbf24'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Chart.js -->
+    <script data-cfasync="false" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 40vh;
+            min-height: 350px;
+            max-height: 500px;
+        }
+
+        .small-chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 250px;
+        }
+
+        .stat-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .mini-badge {
+            background: #f1f5f9;
+            color: #64748b;
+            border: 1px solid #e2e8f0;
+        }
+
+        .medal-gold {
+            background: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fcd34d;
+            font-weight: 800;
+        }
+
+        .medal-silver {
+            background: #f8fafc;
+            color: #334155;
+            border: 1px solid #cbd5e1;
+            font-weight: 800;
+        }
+
+        .medal-bronze {
+            background: #fff7ed;
+            color: #9a3412;
+            border: 1px solid #fdba74;
+            font-weight: 800;
+        }
+
+        .diploma-badge {
+            background: #eff6ff;
+            color: #1e40af;
+            border: 1px solid #bfdbfe;
+            font-weight: 800;
+        }
+
+        /* Barra de progreso animada para estadísticas de entrenadora */
+        .coach-bar-track {
+            background: #e2e8f0;
+            border-radius: 9999px;
+            height: 8px;
+            overflow: hidden;
+        }
+
+        .coach-bar-fill {
+            height: 100%;
+            border-radius: 9999px;
+            transition: width 1s ease;
+        }
+
+        /* Mobile menu */
+        #mobile-menu {
+            display: none;
+        }
+
+        #mobile-menu.open {
+            display: block;
+        }
+
+        /* Logo navbar */
+        .nav-logo {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        @media (max-width: 640px) {
+            .nav-logo {
+                height: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-cec-red selection:text-white">
+
+    <!-- Navbar -->
+    <nav class="bg-slate-900 text-white sticky top-0 z-50 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo + Título -->
+                <div class="flex items-center gap-3">
+                    <img src="assets/logo-cec-2022-b.png" alt="Logo Club Esgrima Cabudare" class="nav-logo">
+                    <span class="font-bold text-base sm:text-xl tracking-wider leading-tight">CLUB ESGRIMA CABUDARE
+                        2026</span>
+                </div>
+
+                <!-- Links desktop -->
+                <div class="hidden md:block">
+                    <div class="ml-6 flex items-baseline space-x-1">
+                        <a href="#resumen"
+                            class="hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Resumen</a>
+                        <a href="#elite"
+                            class="hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Élite</a>
+                        <a href="#directorio"
+                            class="hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Directorio</a>
+                        <a href="#entrenadoras"
+                            class="hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Entrenadoras</a>
+                        <a href="#formacion"
+                            class="hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Formación</a>
+                    </div>
+                </div>
+
+                <!-- Right side: badge + hamburger -->
+                <div class="flex items-center gap-3">
+                    <span
+                        class="hidden sm:inline text-[10px] font-bold text-white bg-cec-red px-3 py-1 rounded-full uppercase">Validado</span>
+                    <!-- Hamburger (mobile) -->
+                    <button id="menu-btn" class="md:hidden p-2 rounded-md hover:bg-slate-700 transition-colors"
+                        aria-label="Menú">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile menu panel -->
+        <div id="mobile-menu" class="md:hidden bg-slate-800 border-t border-slate-700">
+            <div class="px-4 py-3 space-y-1">
+                <a href="#resumen"
+                    class="block px-3 py-2 rounded-md text-sm font-medium hover:bg-slate-700 transition-colors"
+                    onclick="closeMobileMenu()">Resumen</a>
+                <a href="#elite"
+                    class="block px-3 py-2 rounded-md text-sm font-medium hover:bg-slate-700 transition-colors"
+                    onclick="closeMobileMenu()">Élite</a>
+                <a href="#directorio"
+                    class="block px-3 py-2 rounded-md text-sm font-medium hover:bg-slate-700 transition-colors"
+                    onclick="closeMobileMenu()">Directorio</a>
+                <a href="#entrenadoras"
+                    class="block px-3 py-2 rounded-md text-sm font-medium hover:bg-slate-700 transition-colors"
+                    onclick="closeMobileMenu()">Entrenadoras</a>
+                <a href="#formacion"
+                    class="block px-3 py-2 rounded-md text-sm font-medium hover:bg-slate-700 transition-colors"
+                    onclick="closeMobileMenu()">Formación</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
+
+        <!-- ===== RESUMEN / KPIs ===== -->
+        <section id="resumen" class="scroll-mt-20">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <h1 class="text-4xl font-extrabold text-slate-900 mb-4">Campeonato Nacional Infantil y Precadete 2025 /
+                    2026</h1>
+                <h2 class="text-2xl text-cec-red font-semibold mb-4">Informe de Rendimiento: Club Esgrima Cabudare
+                    (CEC)</h2>
+                <p class="text-lg text-slate-600">
+                    El Club Esgrima Cabudare consolidó su presencia en el CN 2025-2026 de Valencia, logrando un
+                    rendimiento sobresaliente: <strong>73% de efectividad técnica</strong> (11 de 15 entradas en
+                    Top-8), cosechando 5 medallas y 6 diplomas nacionales con solo 13 atletas únicos.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <div
+                    class="stat-card bg-white rounded-xl shadow border border-slate-100 p-6 text-center border-b-4 border-b-green-500">
+                    <div class="text-5xl mb-2">&#128200;</div>
+                    <div class="text-4xl font-black text-slate-900 mb-1">73%</div>
+                    <div class="text-sm font-semibold text-slate-500 uppercase tracking-wide">Efectividad Técnica</div>
+                    <p class="text-xs text-slate-400 mt-1">11 Top-8 de 15 entradas</p>
+                </div>
+                <div
+                    class="stat-card bg-white rounded-xl shadow border border-slate-100 p-6 text-center border-b-4 border-b-medal-gold">
+                    <div class="text-5xl mb-2">&#127942;</div>
+                    <div class="text-4xl font-black text-slate-900 mb-1">5</div>
+                    <div class="text-sm font-semibold text-slate-500 uppercase tracking-wide">Medallas Totales</div>
+                    <p class="text-xs text-slate-400 mt-1">1 Oro · 2 Platas · 2 Bronces</p>
+                </div>
+                <div
+                    class="stat-card bg-white rounded-xl shadow border border-slate-100 p-6 text-center border-b-4 border-b-blue-500">
+                    <div class="text-5xl mb-2">&#127941;</div>
+                    <div class="text-4xl font-black text-slate-900 mb-1">6</div>
+                    <div class="text-sm font-semibold text-slate-500 uppercase tracking-wide">Diplomas (Top 8)</div>
+                    <p class="text-xs text-slate-400 mt-1">Incluye dobles finales</p>
+                </div>
+                <div
+                    class="stat-card bg-white rounded-xl shadow border border-slate-100 p-6 text-center border-b-4 border-b-indigo-500">
+                    <div class="text-5xl mb-2">&#128101;</div>
+                    <div class="text-4xl font-black text-slate-900 mb-1">13</div>
+                    <div class="text-sm font-semibold text-slate-500 uppercase tracking-wide">Atletas Únicos</div>
+                    <p class="text-xs text-slate-400 mt-1">21 participaciones totales</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== EVALUACIÓN ÉLITE ===== -->
+        <section id="elite" class="scroll-mt-20">
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold text-slate-900">Evaluación de Rendimiento Élite</h3>
+                <p class="text-slate-600 mt-2">Medallistas del CEC en el CN 2025-2026. Cuatro atletas que subieron al
+                    podio nacional representando a Cabudare.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                <!-- Silvana García — Oro + Plata -->
+                <div class="bg-white rounded-xl shadow border border-amber-200 overflow-hidden group">
+                    <div class="bg-amber-400 h-2 w-full"></div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h4 class="text-xl font-bold text-slate-900">Silvana García</h4>
+                            <span class="text-2xl" title="Sable">&#9876;</span>
+                        </div>
+                        <div class="mb-4">
+                            <span
+                                class="inline-block bg-amber-100 text-amber-800 text-xs px-2 py-1 rounded font-semibold uppercase tracking-wider">Máximo
+                                Rendimiento · Sable</span>
+                        </div>
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-center text-sm"><span class="mr-2">&#129351;</span> <strong>Oro</strong> — Infantil A</li>
+                            <li class="flex items-center text-sm"><span class="mr-2">&#129352;</span> <strong>Plata</strong> — Infantil B</li>
+                        </ul>
+                        <p class="text-sm text-slate-600 border-t pt-4">La atleta más laureada del club. Única tiradora
+                            en alcanzar dos finales nacionales en categorías diferentes en el mismo campeonato.</p>
+                    </div>
+                </div>
+
+                <!-- Elisa Figueredo — Plata -->
+                <div class="bg-white rounded-xl shadow border border-slate-200 overflow-hidden group">
+                    <div class="bg-cec-red h-2 w-full"></div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h4 class="text-xl font-bold text-slate-900">Elisa Figueredo</h4>
+                            <span class="text-2xl" title="Florete">&#9876;</span>
+                        </div>
+                        <div class="mb-4">
+                            <span
+                                class="inline-block bg-slate-100 text-slate-800 text-xs px-2 py-1 rounded font-semibold uppercase tracking-wider">Podio
+                                Nacional · Florete</span>
+                        </div>
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-center text-sm"><span class="mr-2">&#129352;</span> <strong>Plata</strong> — Infantil A</li>
+                            <li class="flex items-center text-sm"><span class="mr-2">&#11088;</span> Top-8 — Infantil B</li>
+                        </ul>
+                        <p class="text-sm text-slate-600 border-t pt-4">Medallista de plata y la única representante
+                            del florete femenino en podio. Su actuación en Infantil B confirma proyección hacia la
+                            élite.</p>
+                    </div>
+                </div>
+
+                <!-- Luciana Cruz — Bronce -->
+                <div class="bg-white rounded-xl shadow border border-orange-200 overflow-hidden group">
+                    <div class="bg-orange-400 h-2 w-full"></div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h4 class="text-xl font-bold text-slate-900">Luciana Cruz</h4>
+                            <span class="text-2xl" title="Sable">&#9876;</span>
+                        </div>
+                        <div class="mb-4">
+                            <span
+                                class="inline-block bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded font-semibold uppercase tracking-wider">Podio
+                                Nacional · Sable</span>
+                        </div>
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-center text-sm"><span class="mr-2">&#129353;</span> <strong>Bronce</strong> — Infantil A</li>
+                            <li class="flex items-center text-sm"><span class="mr-2">&#127942;</span> Participación Mini</li>
+                        </ul>
+                        <p class="text-sm text-slate-600 border-t pt-4">Medallista de bronce en su categoría y también
+                            presente en la etapa formativa Mini. Atleta clave para el relevo del equipo de Sable.</p>
+                    </div>
+                </div>
+
+                <!-- Edrick González — Bronce -->
+                <div class="bg-white rounded-xl shadow border border-orange-200 overflow-hidden group">
+                    <div class="bg-orange-400 h-2 w-full"></div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h4 class="text-xl font-bold text-slate-900">Edrick González</h4>
+                            <span class="text-2xl" title="Sable">&#9876;</span>
+                        </div>
+                        <div class="mb-4">
+                            <span
+                                class="inline-block bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded font-semibold uppercase tracking-wider">Podio
+                                Nacional · Sable</span>
+                        </div>
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-center text-sm"><span class="mr-2">&#129353;</span> <strong>Bronce</strong> — Infantil A</li>
+                            <li class="flex items-center text-sm"><span class="mr-2">&#127942;</span> Participación Mini</li>
+                        </ul>
+                        <p class="text-sm text-slate-600 border-t pt-4">Bronce en Sable Masculino Infantil A. Su
+                            participación paralela en Mini refuerza su desarrollo integral como futuro competidor élite.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ===== DIRECTORIO MAESTRO ===== -->
+        <section id="directorio" class="scroll-mt-20 bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+            <div class="mb-6">
+                <h3 class="text-2xl font-bold text-slate-900">Directorio Maestro de Posiciones</h3>
+                <p class="text-slate-500 text-sm mt-1">Listado completo verificado de todas las participaciones del CEC
+                    en el CN 2025-2026.</p>
+            </div>
+
+            <div class="mb-6 relative">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400 text-xl">&#8981;</span>
+                <input type="text" id="searchInput" placeholder="Buscar por nombre, arma o categoría..."
+                    class="w-full pl-10 pr-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-cec-red focus:border-transparent transition-shadow">
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-slate-200">
+                    <thead class="bg-slate-50">
+                        <tr>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">
+                                Atleta</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">
+                                Arma</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">
+                                Categoría</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-center text-xs font-bold text-slate-500 uppercase tracking-wider">
+                                Posición</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">
+                                Estatus</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultsTable" class="bg-white divide-y divide-slate-100">
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ===== ESTADÍSTICAS DE ENTRENADORAS ===== -->
+        <section id="entrenadoras" class="scroll-mt-20">
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold text-slate-900">Estadísticas por Entrenadora</h3>
+                <p class="text-slate-600 mt-2">Análisis del rendimiento de los atletas bajo la dirección técnica de las
+                    entrenadoras del club para el CN 2025-2026.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+                <!-- Tibisay Reinoso - Sable -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="bg-slate-900 px-6 py-4 border-b-4 border-amber-400">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-[10px] font-black text-amber-400 uppercase tracking-widest mb-1">
+                                    Entrenadora · Sable</p>
+                                <h4 class="text-xl font-black text-white">Tibisay Reinoso</h4>
+                            </div>
+                            <span class="text-3xl">&#9876;</span>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-5">
+                        <!-- KPIs de entrenadora -->
+                        <div class="grid grid-cols-3 gap-3 text-center">
+                            <div class="bg-amber-50 rounded-xl p-3 border border-amber-100">
+                                <p class="text-2xl font-black text-amber-700">3</p>
+                                <p class="text-[10px] font-bold text-slate-500 uppercase">Medallas</p>
+                            </div>
+                            <div class="bg-slate-50 rounded-xl p-3 border border-slate-100">
+                                <p class="text-2xl font-black text-slate-700">5</p>
+                                <p class="text-[10px] font-bold text-slate-500 uppercase">Atletas</p>
+                            </div>
+                            <div class="bg-green-50 rounded-xl p-3 border border-green-100">
+                                <p class="text-2xl font-black text-green-700">80%</p>
+                                <p class="text-[10px] font-bold text-slate-500 uppercase">Efectividad</p>
+                            </div>
+                        </div>
+
+                        <!-- Desglose por atleta -->
+                        <div>
+                            <p class="text-xs font-black text-slate-500 uppercase tracking-widest mb-3">Rendimiento por
+                                atleta</p>
+                            <div class="space-y-3">
+                                <div>
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="text-sm font-bold text-slate-700">Silvana García</span>
+                                        <div class="flex gap-1">
+                                            <span class="medal-gold text-[9px] px-2 py-0.5 rounded border">&#129351;
+                                                Inf A</span>
+                                            <span class="medal-silver text-[9px] px-2 py-0.5 rounded border">&#129352;
+                                                Inf B</span>
+                                        </div>
+                                    </div>
+                                    <div class="coach-bar-track">
+                                        <div class="coach-bar-fill bg-amber-400" style="width:100%"></div>
+                                    </div>
+                                    <p class="text-[10px] text-slate-400 mt-0.5">Oro Inf A · Plata Inf B · 100% premiada
+                                    </p>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="text-sm font-bold text-slate-700">Luciana Cruz</span>
+                                        <div class="flex gap-1">
+                                            <span class="medal-bronze text-[9px] px-2 py-0.5 rounded border">&#129353;
+                                                Inf A</span>
+                                            <span class="mini-badge text-[9px] px-2 py-0.5 rounded border">Partic.
+                                                Mini</span>
+                                        </div>
+                                    </div>
+                                    <div class="coach-bar-track">
+                                        <div class="coach-bar-fill bg-orange-400" style="width:75%"></div>
+                                    </div>
+                                    <p class="text-[10px] text-slate-400 mt-0.5">Medallista + participación formativa
+                                    </p>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="text-sm font-bold text-slate-700">Edrick González</span>
+                                        <div class="flex gap-1">
+                                            <span class="medal-bronze text-[9px] px-2 py-0.5 rounded border">&#129353;
+                                                Inf A</span>
+                                            <span class="mini-badge text-[9px] px-2 py-0.5 rounded border">Partic.
+                                                Mini</span>
+                                        </div>
+                                    </div>
+                                    <div class="coach-bar-track">
+                                        <div class="coach-bar-fill bg-orange-400" style="width:75%"></div>
+                                    </div>
+                                    <p class="text-[10px] text-slate-400 mt-0.5">Medallista + participación formativa
+                                    </p>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="text-sm font-bold text-slate-700">Ana Pérez</span>
+                                        <div class="flex gap-1">
+                                            <span class="mini-badge text-[9px] px-2 py-0.5 rounded border">11ma Inf
+                                                A</span>
+                                            <span class="mini-badge text-[9px] px-2 py-0.5 rounded border">Partic.
+                                                Mini</span>
+                                        </div>
+                                    </div>
+                                    <div class="coach-bar-track">
+                                        <div class="coach-bar-fill bg-slate-400" style="width:40%"></div>
+                                    </div>
+                                    <p class="text-[10px] text-slate-400 mt-0.5">Competitiva en Infantil A + formativa
+                                    </p>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="text-sm font-bold text-slate-700">Alejandro Rodríguez</span>
+                                        <div class="flex gap-1">
+                                            <span class="mini-badge text-[9px] px-2 py-0.5 rounded border">12do Inf
+                                                B</span>
+                                        </div>
+                                    </div>
+                                    <div class="coach-bar-track">
+                                        <div class="coach-bar-fill bg-slate-300" style="width:25%"></div>
+                                    </div>
+                                    <p class="text-[10px] text-slate-400 mt-0.5">Posición competitiva en Infantil B</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Conclusión entrenadora -->
+                        <div class="bg-slate-900 text-white p-4 rounded-xl border-l-4 border-amber-400">
+                            <p class="text-xs leading-relaxed text-slate-300">
+                                <strong class="text-white">Análisis:</strong> El equipo de Sable bajo la dirección de
+                                Tibisay Reinoso fue el eje del medallero del CEC. Silvana García representó el pico de
+                                rendimiento del ciclo. La base formativa (Luciana, Edrick, Ana) asegura el relevo para
+                                el próximo ciclo.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Josefina Escalona - Florete -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="bg-slate-900 px-6 py-4 border-b-4 border-cec-red">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-[10px] font-black text-cec-red uppercase tracking-widest mb-1"
+                                    style="color:#fca5a5;">
+                                    Entrenadora · Florete</p>
+                                <h4 class="text-xl font-black text-white">Josefina Escalona</h4>
+                            </div>
+                            <span class="text-3xl">&#9876;</span>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-5">
+                        <!-- KPIs de entrenadora -->
+                        <div class="grid grid-cols-3 gap-3 text-center">
+                            <div class="bg-red-50 rounded-xl p-3 border border-red-100">
+                                <p class="text-2xl font-black text-red-700">1</p>
+                                <p class="text-[10px] font-bold text-slate-500 uppercase">Medallas</p>
+                            </div>
+                            <div class="bg-slate-50 rounded-xl p-3 border border-slate-100">
+                                <p class="text-2xl font-black text-slate-700">5</p>
+                                <p class="text-[10px] font-bold text-slate-500 uppercase">Atletas</p>
+                            </div>
+                            <div class="bg-blue-50 rounded-xl p-3 border border-blue-100">
+                                <p class="text-2xl font-black text-blue-700">67%</p>
+                                <p class="text-[10px] font-bold text-slate-500 uppercase">Efectividad</p>
+                            </div>
+                        </div>
+
+                        <!-- Desglose por atleta -->
+                        <div>
+                            <p class="text-xs font-black text-slate-500 uppercase tracking-widest mb-3">Rendimiento por
+                                atleta</p>
+                            <div class="space-y-3">
+                                <div>
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="text-sm font-bold text-slate-700">Elisa Figueredo</span>
+                                        <div class="flex gap-1">
+                                            <span class="medal-silver text-[9px] px-2 py-0.5 rounded border">&#129352;
+                                                Inf A</span>
+                                            <span class="diploma-badge text-[9px] px-2 py-0.5 rounded border">&#127941;
+                                                Inf B</span>
+                                        </div>
+                                    </div>
+                                    <div class="coach-bar-track">
+                                        <div class="coach-bar-fill bg-red-500" style="width:100%"></div>
+                                    </div>
+                                    <p class="text-[10px] text-slate-400 mt-0.5">Plata Inf A · Top-8 Inf B (cuadro
+                                        semifinal)</p>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="text-sm font-bold text-slate-700">Perla Cruz Monagas</span>
+                                        <div class="flex gap-1">
+                                            <span class="diploma-badge text-[9px] px-2 py-0.5 rounded border">&#127941;
+                                                Inf A</span>
+                                            <span class="diploma-badge text-[9px] px-2 py-0.5 rounded border">&#127941;
+                                                Inf B</span>
+                                        </div>
+                                    </div>
+                                    <div class="coach-bar-track">
+                                        <div class="coach-bar-fill bg-blue-500" style="width:90%"></div>
+                                    </div>
+                                    <p class="text-[10px] text-slate-400 mt-0.5">Top-8 Inf A y Inf B · pase cuadro
+                                        semifinal</p>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="text-sm font-bold text-slate-700">Joaquín Pérez</span>
+                                        <div class="flex gap-1">
+                                            <span class="diploma-badge text-[9px] px-2 py-0.5 rounded border">&#127941;
+                                                Inf B</span>
+                                            <span class="diploma-badge text-[9px] px-2 py-0.5 rounded border">&#127941;
+                                                Inf A</span>
+                                        </div>
+                                    </div>
+                                    <div class="coach-bar-track">
+                                        <div class="coach-bar-fill bg-blue-500" style="width:85%"></div>
+                                    </div>
+                                    <p class="text-[10px] text-slate-400 mt-0.5">Top-8 Inf A y Inf B · pase cuadro
+                                        semifinal</p>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="text-sm font-bold text-slate-700">César Pérez</span>
+                                        <div class="flex gap-1">
+                                            <span class="mini-badge text-[9px] px-2 py-0.5 rounded border">9no
+                                                Precadete</span>
+                                        </div>
+                                    </div>
+                                    <div class="coach-bar-track">
+                                        <div class="coach-bar-fill bg-slate-400" style="width:45%"></div>
+                                    </div>
+                                    <p class="text-[10px] text-slate-400 mt-0.5">Top 10 en categoría superior</p>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="text-sm font-bold text-slate-700">Wanda Benítez</span>
+                                        <div class="flex gap-1">
+                                            <span class="mini-badge text-[9px] px-2 py-0.5 rounded border">10ma
+                                                Precadete</span>
+                                            <span class="mini-badge text-[9px] px-2 py-0.5 rounded border">12va Inf
+                                                B</span>
+                                        </div>
+                                    </div>
+                                    <div class="coach-bar-track">
+                                        <div class="coach-bar-fill bg-slate-300" style="width:35%"></div>
+                                    </div>
+                                    <p class="text-[10px] text-slate-400 mt-0.5">Dos categorías competidas</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Conclusión entrenadora -->
+                        <div class="bg-slate-900 text-white p-4 rounded-xl border-l-4 border-cec-red">
+                            <p class="text-xs leading-relaxed text-slate-300">
+                                <strong class="text-white">Análisis:</strong> El equipo de Florete bajo la dirección de
+                                Josefina Escalona aportó el mayor volumen de diplomas Top-8 del club. Elisa Figueredo,
+                                Perla Cruz y Joaquín Pérez conforman una base técnica sólida que garantiza
+                                competitividad
+                                nacional continuada.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ===== FORMACIÓN / SEMILLERO ===== -->
+        <section id="formacion"
+            class="scroll-mt-20 bg-slate-900 rounded-2xl border border-slate-700 shadow-lg p-6 md:p-8">
+            <p class="text-[10px] font-black text-cec-red uppercase mb-4 tracking-widest" style="color:#fca5a5;">
+                Semillero
+                · Mini / Formativo</p>
+            <h3 class="text-xl font-bold text-white mb-2">Base Generacional del Club</h3>
+            <p class="text-slate-400 text-sm mb-6">Atletas en etapa formativa participativa. Fundamentales para el
+                relevo generacional del Club Esgrima Cabudare.</p>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
+                <div class="bg-white/10 p-3 rounded-xl text-center">
+                    <p class="text-sm font-bold text-white">Geronimo B.</p>
+                    <p class="text-[10px] text-slate-400 italic mt-1">Florete · Josefina E.</p>
+                </div>
+                <div class="bg-white/10 p-3 rounded-xl text-center">
+                    <p class="text-sm font-bold text-white">Fabrizio Q.</p>
+                    <p class="text-[10px] text-slate-400 italic mt-1">Sable · Tibisay R.</p>
+                </div>
+                <div class="bg-white/10 p-3 rounded-xl text-center">
+                    <p class="text-sm font-bold text-white">Joaquín L.</p>
+                    <p class="text-[10px] text-slate-400 italic mt-1">Sable · Tibisay R.</p>
+                </div>
+                <div class="bg-white/10 p-3 rounded-xl text-center">
+                    <p class="text-sm font-bold text-white">Luciana Cruz</p>
+                    <p class="text-[10px] text-slate-400 italic mt-1">Sable · Tibisay R.</p>
+                </div>
+                <div class="bg-white/10 p-3 rounded-xl text-center">
+                    <p class="text-sm font-bold text-white">Edrick González</p>
+                    <p class="text-[10px] text-slate-400 italic mt-1">Sable · Tibisay R.</p>
+                </div>
+                <div class="bg-white/10 p-3 rounded-xl text-center">
+                    <p class="text-sm font-bold text-white">Ana Pérez</p>
+                    <p class="text-[10px] text-slate-400 italic mt-1">Sable · Tibisay R.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-800 text-slate-400 py-6 text-center text-sm mt-16">
+        <p>Club de Esgrima Cabudare &copy; 2026</p>
+        <p class="text-xs mt-1">
+            <a href="https://tepuy.site" target="_blank" rel="noopener noreferrer"
+                class="hover:text-gold transition">TEPUY</a> All rights reserved &copy; Copyright 2026 - <a
+                href="https://tepuy.site" target="_blank" rel="noopener noreferrer"
+                class="hover:text-gold transition">TEPUY</a>
+        </p>
+    </footer>
+
+    <script data-cfasync="false">
+        // ── Datos completos ──────────────────────────────────────────────────
+        const allData = [
+            { name: "Silvana García", weapon: "Sable", cat: "Infantil A", pos: "1ra", status: "Oro", type: "medal-gold" },
+            { name: "Silvana García", weapon: "Sable", cat: "Infantil B", pos: "2da", status: "Plata", type: "medal-silver" },
+            { name: "Joaquín Pérez", weapon: "Florete", cat: "Infantil B", pos: "5to", status: "Diploma", type: "diploma-badge" },
+            { name: "Joaquín Pérez", weapon: "Florete", cat: "Infantil A", pos: "7mo", status: "Diploma", type: "diploma-badge" },
+            { name: "Elisa Figueredo", weapon: "Florete", cat: "Infantil A", pos: "2da", status: "Plata", type: "medal-silver" },
+            { name: "Elisa Figueredo", weapon: "Florete", cat: "Infantil B", pos: "6ta", status: "Diploma", type: "diploma-badge" },
+            { name: "Perla Cruz Monagas", weapon: "Florete", cat: "Infantil A", pos: "6ta", status: "Diploma", type: "diploma-badge" },
+            { name: "Perla Cruz Monagas", weapon: "Florete", cat: "Infantil B", pos: "8va", status: "Diploma", type: "diploma-badge" },
+            { name: "Luciana Cruz", weapon: "Sable", cat: "Infantil A", pos: "3ra", status: "Bronce", type: "medal-bronze" },
+            { name: "Edrick González", weapon: "Sable", cat: "Infantil A", pos: "3ro", status: "Bronce", type: "medal-bronze" },
+            { name: "César Pérez", weapon: "Florete", cat: "Precadete", pos: "9no", status: "Top 10", type: "mini-badge" },
+            { name: "Wanda Benítez", weapon: "Florete", cat: "Precadete", pos: "10ma", status: "Top 10", type: "mini-badge" },
+            { name: "Ana Pérez", weapon: "Sable", cat: "Infantil A", pos: "11ma", status: "Posición", type: "mini-badge" },
+            { name: "Wanda Benítez", weapon: "Florete", cat: "Infantil B", pos: "12va", status: "Posición", type: "mini-badge" },
+            { name: "Alejandro Rodríguez", weapon: "Sable", cat: "Infantil B", pos: "12do", status: "Posición", type: "mini-badge" },
+            { name: "Luciana Cruz", weapon: "Sable", cat: "Mini", pos: "-", status: "Participación", type: "mini-badge" },
+            { name: "Edrick González", weapon: "Sable", cat: "Mini", pos: "-", status: "Participación", type: "mini-badge" },
+            { name: "Ana Pérez", weapon: "Sable", cat: "Mini", pos: "-", status: "Participación", type: "mini-badge" },
+            { name: "Joaquín Linarez", weapon: "Sable", cat: "Mini", pos: "-", status: "Participación", type: "mini-badge" },
+            { name: "Geronimo Barrios", weapon: "Florete", cat: "Mini", pos: "-", status: "Participación", type: "mini-badge" },
+            { name: "Fabrizio Quevedo", weapon: "Sable", cat: "Mini", pos: "-", status: "Participación", type: "mini-badge" }
+        ];
+
+        // ── Render tabla ─────────────────────────────────────────────────────
+        function renderTable(data) {
+            const tbody = document.getElementById('resultsTable');
+            tbody.innerHTML = '';
+            if (data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="px-6 py-4 text-center text-sm text-slate-500">No se encontraron resultados</td></tr>';
+                return;
+            }
+            data.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 transition-colors';
+                tr.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap"><div class="font-medium text-slate-900 text-sm">${item.name}</div></td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600 font-bold uppercase">${item.weapon}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">${item.cat}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-center font-black text-sm text-slate-700">${item.pos}</td>
+                    <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 py-0.5 rounded text-[9px] font-black uppercase ${item.type}">${item.status}</span></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // ── Búsqueda ─────────────────────────────────────────────────────────
+        document.addEventListener('DOMContentLoaded', () => {
+            renderTable(allData);
+
+            document.getElementById('searchInput').addEventListener('input', e => {
+                const term = e.target.value.toLowerCase();
+                const filtered = allData.filter(a =>
+                    a.name.toLowerCase().includes(term) ||
+                    a.weapon.toLowerCase().includes(term) ||
+                    a.cat.toLowerCase().includes(term) ||
+                    a.status.toLowerCase().includes(term)
+                );
+                renderTable(filtered);
+            });
+        });
+
+        // ── Menú móvil ────────────────────────────────────────────────────────
+        document.getElementById('menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('open');
+        });
+
+        function closeMobileMenu() {
+            document.getElementById('mobile-menu').classList.remove('open');
+        }
+    </script>
+</body>
+
+</html>
