@@ -1,0 +1,2481 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Reporte Técnico del Club Esgrima Cabudare en el Campeonato Nacional Infantil y Precadete 2026. Resultados, estadísticas y evaluación completa." />
+    <title>Reporte Técnico · Club Esgrima Cabudare · CN 2025–2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link data-cfasync="false"
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --bg: #080A0F;
+            --bg2: #0E1118;
+            --bg3: #151820;
+            --bg4: #1C2030;
+            --border: rgba(255, 255, 255, 0.06);
+            --border2: rgba(255, 255, 255, 0.11);
+            --text: #DDE2EE;
+            --muted: #5A6178;
+            --faint: #2E3347;
+            --gold: #D4A017;
+            --silver: #9BAAB5;
+            --bronze: #B5713A;
+            --accent: #3E7BFA;
+            --accent2: #00C9A7;
+            --red: #E63946;
+            --sable: #E63946;
+            --florete: #3E7BFA;
+            --r: 6px;
+            --r2: 12px;
+            --t: 180ms ease;
+            --fd: 'Bebas Neue', sans-serif;
+            --fb: 'DM Sans', sans-serif;
+            --fm: 'DM Mono', monospace;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--fb);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* CEC Logo */
+        .cec-logo {
+            display: inline-block;
+            vertical-align: middle;
+            object-fit: contain;
+        }
+
+        .cec-logo.nav-logo {
+            height: 28px;
+            width: 28px;
+        }
+
+        .cec-logo.card-logo {
+            height: 22px;
+            width: 22px;
+        }
+
+        .cec-logo.inline-logo {
+            height: 14px;
+            width: 14px;
+            margin-right: 3px;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        .section {
+            padding: 88px 0;
+        }
+
+        .section+.section {
+            border-top: 1px solid var(--border);
+        }
+
+        /* NAV */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(8, 10, 15, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 13px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-text strong {
+            display: block;
+            font-family: var(--fm);
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: .06em;
+            color: #fff;
+        }
+
+        .nav-text span {
+            font-family: var(--fm);
+            font-size: 10px;
+            color: var(--muted);
+            letter-spacing: .06em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2px;
+        }
+
+        .nav-links a {
+            font-family: var(--fm);
+            font-size: 10px;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--muted);
+            padding: 7px 13px;
+            border-radius: var(--r);
+            transition: color var(--t), background var(--t);
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+            background: var(--bg3);
+        }
+
+        /* Mobile hamburger */
+        .nav-hamburger {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--muted);
+            cursor: pointer;
+            padding: 7px;
+            border-radius: var(--r);
+            transition: color var(--t), background var(--t);
+        }
+
+        .nav-hamburger:hover {
+            color: var(--text);
+            background: var(--bg3);
+        }
+
+        .nav-hamburger svg {
+            width: 22px;
+            height: 22px;
+            display: block;
+        }
+
+        .nav-mobile {
+            display: none;
+            background: rgba(8, 10, 15, 0.97);
+            border-top: 1px solid var(--border);
+            padding: 12px 28px;
+        }
+
+        .nav-mobile.open {
+            display: block;
+        }
+
+        .nav-mobile a {
+            display: block;
+            font-family: var(--fm);
+            font-size: 11px;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--muted);
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            transition: color var(--t);
+        }
+
+        .nav-mobile a:last-child {
+            border-bottom: none;
+        }
+
+        .nav-mobile a:hover {
+            color: var(--text);
+        }
+
+        @media(max-width:640px) {
+            .nav-links {
+                display: none;
+            }
+
+            .nav-hamburger {
+                display: block;
+            }
+
+            .cec-logo.nav-logo {
+                height: 24px;
+                width: 24px;
+            }
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 100px 0 80px;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero-glow {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: radial-gradient(ellipse 70% 55% at 10% 50%, rgba(62, 123, 250, .09) 0%, transparent 70%), radial-gradient(ellipse 55% 45% at 90% 40%, rgba(230, 57, 70, .07) 0%, transparent 70%);
+        }
+
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background-image: linear-gradient(rgba(255, 255, 255, .025) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .025) 1px, transparent 1px);
+            background-size: 64px 64px;
+            mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
+            -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--fm);
+            font-size: 11px;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 24px;
+        }
+
+        .hero-eyebrow::before {
+            content: '';
+            width: 28px;
+            height: 1px;
+            background: var(--accent);
+            display: block;
+        }
+
+        .hero-h1 {
+            font-family: var(--fd);
+            font-size: clamp(56px, 9vw, 120px);
+            letter-spacing: 3px;
+            line-height: .9;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .hero-h1 .c1 {
+            color: var(--accent);
+        }
+
+        .hero-h1 .c2 {
+            color: var(--gold);
+        }
+
+        .hero-sub {
+            font-size: 16px;
+            color: var(--muted);
+            max-width: 520px;
+            line-height: 1.75;
+            margin-bottom: 48px;
+        }
+
+        .kpi-row {
+            display: flex;
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: var(--r2);
+            overflow: hidden;
+            max-width: 760px;
+        }
+
+        .kpi {
+            flex: 1;
+            background: var(--bg2);
+            padding: 24px 20px;
+            text-align: center;
+            transition: background var(--t);
+        }
+
+        .kpi:hover {
+            background: var(--bg3);
+        }
+
+        .kpi-icon {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .kpi-val {
+            font-family: var(--fd);
+            font-size: 42px;
+            line-height: 1;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .kpi-lbl {
+            font-family: var(--fm);
+            font-size: 9px;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .kpi-sub {
+            font-size: 11px;
+            color: var(--faint);
+            margin-top: 3px;
+        }
+
+        @media(max-width:600px) {
+            .kpi-row {
+                flex-wrap: wrap;
+            }
+
+            .kpi {
+                flex: calc(50% - 1px);
+            }
+        }
+
+        /* SECTION HEADER */
+        .sh {
+            margin-bottom: 44px;
+        }
+
+        .sh-label {
+            font-family: var(--fm);
+            font-size: 10px;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sh-label::before {
+            content: '';
+            width: 20px;
+            height: 1px;
+            background: var(--accent);
+            display: block;
+        }
+
+        .sh-title {
+            font-family: var(--fd);
+            font-size: clamp(32px, 5vw, 60px);
+            letter-spacing: 2px;
+            line-height: .95;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .sh-desc {
+            font-size: 14px;
+            color: var(--muted);
+            max-width: 580px;
+            line-height: 1.75;
+        }
+
+        /* ELITE */
+        .egrid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 16px;
+        }
+
+        .ecard {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: var(--r2);
+            overflow: hidden;
+            transition: border-color var(--t), transform var(--t), box-shadow var(--t);
+        }
+
+        .ecard:hover {
+            border-color: var(--border2);
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, .4);
+        }
+
+        .ecard.star {
+            border-color: rgba(212, 160, 23, .28);
+        }
+
+        .ecard.star:hover {
+            border-color: rgba(212, 160, 23, .5);
+            box-shadow: 0 20px 40px rgba(212, 160, 23, .08);
+        }
+
+        .ecard-top {
+            padding: 22px 24px 18px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .ecard-name {
+            font-family: 'Syne', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.1;
+        }
+
+        .ecard-meta {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 5px;
+        }
+
+        .ecard-ico {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: var(--bg4);
+            border: 1px solid var(--border2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .ecard-results {
+            padding: 14px 24px;
+        }
+
+        .rrow {
+            display: grid;
+            grid-template-columns: 44px 1fr auto;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, .04);
+            font-size: 13px;
+        }
+
+        .rrow:last-child {
+            border-bottom: none;
+        }
+
+        .rpos {
+            font-family: var(--fd);
+            font-size: 26px;
+            line-height: 1;
+            text-align: center;
+        }
+
+        .rpos.p1 {
+            color: var(--gold);
+        }
+
+        .rpos.p2 {
+            color: var(--silver);
+        }
+
+        .rpos.p3 {
+            color: var(--bronze);
+        }
+
+        .rpos.p5 {
+            color: var(--accent);
+        }
+
+        .rpos.pn {
+            color: var(--faint);
+        }
+
+        .rpos.mini {
+            color: var(--accent2);
+            font-size: 18px;
+        }
+
+        .ren {
+            color: var(--text);
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        .res {
+            font-size: 11px;
+            color: var(--muted);
+            margin-top: 2px;
+        }
+
+        .rpv {
+            font-family: var(--fd);
+            font-size: 22px;
+            color: var(--accent2);
+            text-align: right;
+        }
+
+        .rpl {
+            font-family: var(--fm);
+            font-size: 9px;
+            color: var(--muted);
+            letter-spacing: .06em;
+            text-align: right;
+        }
+
+        .pip {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 9px;
+            font-weight: 700;
+            font-family: var(--fm);
+            vertical-align: middle;
+            margin-left: 4px;
+        }
+
+        .pip-g {
+            background: var(--gold);
+            color: #000;
+        }
+
+        .pip-s {
+            background: var(--silver);
+            color: #000;
+        }
+
+        .pip-b {
+            background: var(--bronze);
+            color: #fff;
+        }
+
+        .pip-t {
+            background: rgba(62, 123, 250, .2);
+            color: var(--accent);
+            border: 1px solid rgba(62, 123, 250, .3);
+        }
+
+        .pip-m {
+            background: rgba(0, 201, 167, .15);
+            color: var(--accent2);
+            border: 1px solid rgba(0, 201, 167, .3);
+        }
+
+        .ecard-foot {
+            padding: 13px 24px;
+            background: var(--bg3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .efl {
+            font-family: var(--fm);
+            font-size: 9px;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 4px;
+        }
+
+        .efv {
+            font-family: var(--fd);
+            font-size: 26px;
+            color: var(--accent2);
+            line-height: 1;
+        }
+
+        .ecard-note {
+            padding: 12px 24px;
+            font-size: 12px;
+            color: var(--muted);
+            line-height: 1.65;
+            font-style: italic;
+            border-top: 1px solid var(--border);
+        }
+
+        /* CHIPS */
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-family: var(--fm);
+            font-size: 10px;
+            font-weight: 500;
+            padding: 3px 8px;
+            border-radius: 4px;
+            letter-spacing: .04em;
+        }
+
+        .cg {
+            background: rgba(212, 160, 23, .12);
+            color: var(--gold);
+            border: 1px solid rgba(212, 160, 23, .25);
+        }
+
+        .cs {
+            background: rgba(155, 170, 181, .12);
+            color: var(--silver);
+            border: 1px solid rgba(155, 170, 181, .25);
+        }
+
+        .cb {
+            background: rgba(181, 113, 58, .12);
+            color: var(--bronze);
+            border: 1px solid rgba(181, 113, 58, .25);
+        }
+
+        .ct {
+            background: rgba(62, 123, 250, .10);
+            color: var(--accent);
+            border: 1px solid rgba(62, 123, 250, .2);
+        }
+
+        .cm {
+            background: rgba(0, 201, 167, .10);
+            color: var(--accent2);
+            border: 1px solid rgba(0, 201, 167, .2);
+        }
+
+        .cn {
+            background: var(--bg3);
+            color: var(--muted);
+            border: 1px solid var(--border2);
+        }
+
+        /* TABLE */
+        .twrap {
+            overflow-x: auto;
+            border-radius: var(--r2);
+            border: 1px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        thead th {
+            background: var(--bg3);
+            font-family: var(--fm);
+            font-size: 9px;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            padding: 13px 18px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+            white-space: nowrap;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid var(--border);
+            transition: background var(--t);
+        }
+
+        tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background: rgba(255, 255, 255, .02);
+        }
+
+        tbody td {
+            padding: 13px 18px;
+            vertical-align: middle;
+        }
+
+        .tdn {
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .tfn {
+            font-family: var(--fm);
+            font-size: 10px;
+            color: var(--muted);
+            padding: 11px 18px;
+            border-top: 1px solid var(--border);
+            background: var(--bg2);
+            border-radius: 0 0 var(--r2) var(--r2);
+        }
+
+        .pos-n {
+            font-family: var(--fd);
+            font-size: 28px;
+        }
+
+        .p1n {
+            color: var(--gold);
+        }
+
+        .p2n {
+            color: var(--silver);
+        }
+
+        .p3n {
+            color: var(--bronze);
+        }
+
+        .pnn {
+            color: var(--faint);
+        }
+
+        .sn {
+            font-weight: 600;
+            font-size: 14px;
+            color: #fff;
+        }
+
+        .snsub {
+            font-family: var(--fm);
+            font-size: 10px;
+            color: var(--muted);
+            margin-top: 2px;
+        }
+
+        .tag {
+            font-family: var(--fm);
+            font-size: 9px;
+            padding: 2px 6px;
+            border-radius: 3px;
+            background: var(--bg3);
+            color: var(--muted);
+            border: 1px solid var(--border2);
+            display: inline-block;
+        }
+
+        .mg {
+            color: var(--gold);
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .ms {
+            color: var(--silver);
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .mb {
+            color: var(--bronze);
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .pts {
+            font-family: var(--fd);
+            font-size: 24px;
+            color: var(--accent);
+        }
+
+        .lr {
+            background: rgba(62, 123, 250, .04) !important;
+        }
+
+        .lr td:first-child {
+            border-left: 2px solid var(--accent);
+        }
+
+        .la {
+            color: var(--accent) !important;
+        }
+
+        /* COACHES */
+        .cgrid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        @media(max-width:640px) {
+            .cgrid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .ccard {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: var(--r2);
+            overflow: hidden;
+        }
+
+        .ccard-head {
+            padding: 24px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .ccard-arm {
+            font-family: var(--fm);
+            font-size: 10px;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .as {
+            color: var(--sable);
+        }
+
+        .af {
+            color: var(--florete);
+        }
+
+        .ccard-name {
+            font-family: 'Syne', sans-serif;
+            font-size: 19px;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .ccard-role {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 3px;
+        }
+
+        .cstats {
+            display: flex;
+            gap: 22px;
+        }
+
+        .csv {
+            font-family: var(--fd);
+            font-size: 32px;
+            line-height: 1;
+        }
+
+        .csl {
+            font-family: var(--fm);
+            font-size: 9px;
+            color: var(--muted);
+            letter-spacing: .06em;
+            margin-top: 3px;
+        }
+
+        .cath {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, .03);
+            font-size: 13px;
+            transition: background var(--t);
+        }
+
+        .cath:hover {
+            background: rgba(255, 255, 255, .02);
+        }
+
+        .cath:last-child {
+            border-bottom: none;
+        }
+
+        .cav {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--bg4);
+            border: 1px solid var(--border2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--fd);
+            font-size: 14px;
+            color: var(--muted);
+            flex-shrink: 0;
+        }
+
+        .ci {
+            flex: 1;
+        }
+
+        .cin {
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .cid {
+            font-size: 11px;
+            color: var(--muted);
+            margin-top: 2px;
+        }
+
+        .cpips {
+            display: flex;
+            gap: 4px;
+        }
+
+        .canal {
+            padding: 16px 24px;
+            background: var(--bg3);
+            border-top: 1px solid var(--border);
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        /* SEMILLERO */
+        .sgrid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(148px, 1fr));
+            gap: 12px;
+        }
+
+        .scard {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            padding: 20px 16px;
+            text-align: center;
+            transition: border-color var(--t), transform var(--t);
+        }
+
+        .scard:hover {
+            border-color: rgba(0, 201, 167, .3);
+            transform: translateY(-2px);
+        }
+
+        .sav {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: var(--bg4);
+            border: 1px solid var(--border2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--fd);
+            font-size: 16px;
+            color: var(--accent2);
+            margin: 0 auto 10px;
+        }
+
+        .snm {
+            font-weight: 600;
+            font-size: 13px;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .sdt {
+            font-family: var(--fm);
+            font-size: 10px;
+            color: var(--muted);
+            letter-spacing: .03em;
+            line-height: 1.5;
+        }
+
+        /* CONTRIB */
+        .ctgrid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: var(--r2);
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+
+        @media(max-width:500px) {
+            .ctgrid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .ctcell {
+            background: var(--bg2);
+            padding: 28px 20px;
+            text-align: center;
+        }
+
+        .ctmed {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .ctfrac {
+            font-family: var(--fd);
+            font-size: 44px;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .ctpct {
+            font-family: var(--fm);
+            font-size: 10px;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+
+        .ctbar {
+            height: 4px;
+            background: var(--faint);
+            border-radius: 2px;
+            overflow: hidden;
+            max-width: 100px;
+            margin: 0 auto;
+        }
+
+        .ctfill {
+            height: 100%;
+            border-radius: 2px;
+        }
+
+        .ctwho {
+            font-size: 11px;
+            color: var(--muted);
+            margin-top: 8px;
+            line-height: 1.5;
+        }
+
+        /* BANNER */
+        .lbanner {
+            background: linear-gradient(135deg, rgba(62, 123, 250, .07), rgba(62, 123, 250, .02));
+            border: 1px solid rgba(62, 123, 250, .15);
+            border-radius: var(--r2);
+            padding: 28px 32px;
+            margin-bottom: 32px;
+        }
+
+        .lbanner-t {
+            font-family: var(--fm);
+            font-size: 11px;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .lbanner-b {
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.75;
+        }
+
+        .lbanner-b strong {
+            color: var(--text);
+        }
+
+        /* CALLOUT */
+        .callout {
+            padding: 18px 22px;
+            border-radius: var(--r);
+            border: 1px solid;
+            font-size: 14px;
+            line-height: 1.7;
+            display: flex;
+            gap: 14px;
+            margin: 24px 0;
+        }
+
+        .callout-icon {
+            font-size: 18px;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .c-blue {
+            background: rgba(62, 123, 250, .06);
+            border-color: rgba(62, 123, 250, .2);
+        }
+
+        .callout strong {
+            color: #fff;
+        }
+
+        /* EVAL */
+        .evgrid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        @media(max-width:640px) {
+            .evgrid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .evcard {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: var(--r2);
+            padding: 26px;
+        }
+
+        .evtitle {
+            font-family: 'Syne', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ei {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 13px;
+            line-height: 1.65;
+            color: #B8C2D8;
+        }
+
+        .dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 8px;
+        }
+
+        .dg {
+            background: var(--accent2);
+        }
+
+        .dy {
+            background: var(--gold);
+        }
+
+        /* SCORE */
+        .scorebox {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: var(--r2);
+            padding: 36px;
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .scoregrade {
+            font-family: var(--fd);
+            font-size: 96px;
+            color: var(--accent2);
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .scorer {
+            flex: 1;
+            min-width: 220px;
+        }
+
+        .scorem {
+            font-family: var(--fm);
+            font-size: 10px;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 20px;
+        }
+
+        .metric {
+            margin-bottom: 14px;
+        }
+
+        .mhd {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--muted);
+            margin-bottom: 5px;
+        }
+
+        .mv {
+            color: var(--text);
+        }
+
+        .mbar {
+            height: 4px;
+            background: var(--faint);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .mfill {
+            height: 100%;
+            border-radius: 2px;
+        }
+
+        .fg {
+            background: var(--gold);
+        }
+
+        .fa {
+            background: var(--accent);
+        }
+
+        .fv {
+            background: var(--accent2);
+        }
+
+        .fsi {
+            background: var(--silver);
+        }
+
+        .fbr {
+            background: var(--bronze);
+        }
+
+        .scoresum {
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.8;
+            margin-top: 20px;
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+        }
+
+        .scoresum strong {
+            color: var(--text);
+        }
+
+        /* DIVIDER */
+        .div {
+            height: 1px;
+            background: var(--border);
+            margin: 44px 0;
+        }
+
+        /* FOOTER */
+        .footer {
+            border-top: 1px solid var(--border);
+            padding: 44px 0;
+            text-align: center;
+        }
+
+        .footer-brand {
+            font-family: var(--fd);
+            font-size: 18px;
+            letter-spacing: 2px;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .footer-meta {
+            font-family: var(--fm);
+            font-size: 10px;
+            color: var(--muted);
+            letter-spacing: .06em;
+            line-height: 1.9;
+        }
+
+        .footer-meta a {
+            color: var(--accent);
+            transition: color var(--t);
+        }
+
+        .footer-meta a:hover {
+            color: #fff;
+        }
+
+        /* FADE */
+        .fi {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity .55s ease, transform .55s ease;
+        }
+
+        .fi.v {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media(max-width:640px) {
+            .hero-h1 {
+                font-size: 52px;
+            }
+
+            .section {
+                padding: 56px 0;
+            }
+
+            .egrid {
+                grid-template-columns: 1fr;
+            }
+
+            .scorebox {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .scoregrade {
+                font-size: 72px;
+            }
+
+            .ctgrid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="nav">
+        <div class="nav-inner">
+            <div class="nav-brand">
+                <img src="assets/logo-cec-2022-b.png" alt="Logo Club Esgrima Cabudare" class="cec-logo nav-logo">
+                <div class="nav-text">
+                    <strong>Club Esgrima Cabudare</strong>
+                    <span>CN 2025–2026 · Reporte Técnico</span>
+                </div>
+            </div>
+            <div class="nav-links">
+                <a href="#resumen">Resumen</a>
+                <a href="#elite">Élite</a>
+                <a href="#directorio">Directorio</a>
+                <a href="#entrenadoras">Entrenadoras</a>
+                <a href="#formacion">Formación</a>
+                <a href="#lara">Lara</a>
+            </div>
+            <button class="nav-hamburger" id="menuBtn" aria-label="Menú">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+        <div class="nav-mobile" id="mobileMenu">
+            <a href="#resumen" onclick="closeMobileMenu()">Resumen</a>
+            <a href="#elite" onclick="closeMobileMenu()">Élite</a>
+            <a href="#directorio" onclick="closeMobileMenu()">Directorio</a>
+            <a href="#entrenadoras" onclick="closeMobileMenu()">Entrenadoras</a>
+            <a href="#formacion" onclick="closeMobileMenu()">Formación</a>
+            <a href="#lara" onclick="closeMobileMenu()">Lara</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="resumen">
+        <div class="hero-glow"></div>
+        <div class="hero-grid"></div>
+        <div class="wrap hero-content">
+            <div class="hero-eyebrow">Reporte Técnico · CN 2025–2026</div>
+            <h1 class="hero-h1">CAMPEONATO<br><span class="c1">NACIONAL</span><br><span class="c2">2026</span></h1>
+            <p class="hero-sub">Informe de rendimiento del Club Esgrima Cabudare en el Campeonato Nacional Infantil y
+                Precadete celebrado en Valencia, Estado Carabobo, del 5 al 8 de marzo de 2026.</p>
+            <div class="kpi-row fi">
+                <div class="kpi">
+                    <div class="kpi-icon">📈</div>
+                    <div class="kpi-val" style="color:var(--accent2);">73%</div>
+                    <div class="kpi-lbl">Efectividad</div>
+                    <div class="kpi-sub">11 Top-8 de 15 entradas</div>
+                </div>
+                <div class="kpi">
+                    <div class="kpi-icon">🏆</div>
+                    <div class="kpi-val" style="color:var(--gold);">5</div>
+                    <div class="kpi-lbl">Medallas</div>
+                    <div class="kpi-sub">1 Oro · 2 Plata · 2 Bronce</div>
+                </div>
+                <div class="kpi">
+                    <div class="kpi-icon">🏅</div>
+                    <div class="kpi-val" style="color:var(--accent);">6</div>
+                    <div class="kpi-lbl">Diplomas Nac.</div>
+                    <div class="kpi-sub">Posiciones Top-8</div>
+                </div>
+                <div class="kpi">
+                    <div class="kpi-icon">👥</div>
+                    <div class="kpi-val" style="color:#fff;">12</div>
+                    <div class="kpi-lbl">Atletas</div>
+                    <div class="kpi-sub">19 participaciones totales</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ÉLITE -->
+    <section class="section" id="elite">
+        <div class="wrap">
+            <div class="sh fi">
+                <div class="sh-label">Evaluación de Rendimiento</div>
+                <h2 class="sh-title">MEDALLISTAS<br>DEL CEC</h2>
+                <p class="sh-desc">Atletas que subieron al podio nacional representando al Club Esgrima Cabudare en el
+                    CN 2025–2026.</p>
+            </div>
+            <div class="egrid fi">
+
+                <!-- Silvana -->
+                <div class="ecard star">
+                    <div class="ecard-top">
+                        <div>
+                            <div class="ecard-name">Silvana García</div>
+                            <div class="ecard-meta">Femenino · Sable · Infantil A &amp; B · Cabudare</div>
+                        </div>
+                        <div class="ecard-ico"><img src="assets/logo-cec-2022-b.png" alt="CEC"
+                                class="cec-logo card-logo"></div>
+                    </div>
+                    <div class="ecard-results">
+                        <div class="rrow">
+                            <span class="rpos p1">1°</span>
+                            <div>
+                                <div class="ren">Sable Femenino Infantil A <span class="pip pip-g">G</span></div>
+                                <div class="res">11 tiradores · Campeona Nacional</div>
+                            </div>
+                            <div>
+                                <div class="rpv">32</div>
+                                <div class="rpl">pts ranking</div>
+                            </div>
+                        </div>
+                        <div class="rrow">
+                            <span class="rpos p2">2°</span>
+                            <div>
+                                <div class="ren">Sable Femenino Infantil B <span class="pip pip-s">S</span></div>
+                                <div class="res">7 tiradores · Subcampeona Nacional</div>
+                            </div>
+                            <div>
+                                <div class="rpv">26</div>
+                                <div class="rpl">pts ranking</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ecard-foot">
+                        <div>
+                            <div class="efl">Medallas</div>
+                            <div style="display:flex;gap:4px;margin-top:4px;"><span class="pip pip-g">G</span><span
+                                    class="pip pip-s">S</span></div>
+                        </div>
+                        <div style="text-align:right;">
+                            <div class="efl">Pts. Ranking Total</div>
+                            <div class="efv">58</div>
+                        </div>
+                    </div>
+                    <div class="ecard-note">Atleta más laureada del club. Única tiradora en alcanzar dos finales
+                        nacionales en categorías distintas en el mismo campeonato. Referente nacional del sable
+                        femenino.</div>
+                </div>
+
+                <!-- Elisa -->
+                <div class="ecard">
+                    <div class="ecard-top">
+                        <div>
+                            <div class="ecard-name">Elisa Figueredo</div>
+                            <div class="ecard-meta">Femenino · Florete · Infantil A &amp; B · Cabudare</div>
+                        </div>
+                        <div class="ecard-ico"><img src="assets/logo-cec-2022-b.png" alt="CEC"
+                                class="cec-logo card-logo"></div>
+                    </div>
+                    <div class="ecard-results">
+                        <div class="rrow">
+                            <span class="rpos p2">2°</span>
+                            <div>
+                                <div class="ren">Florete Femenino Infantil A <span class="pip pip-s">S</span></div>
+                                <div class="res">8 tiradores · Subcampeona Nacional</div>
+                            </div>
+                            <div>
+                                <div class="rpv">26</div>
+                                <div class="rpl">pts ranking</div>
+                            </div>
+                        </div>
+                        <div class="rrow">
+                            <span class="rpos p5">6°</span>
+                            <div>
+                                <div class="ren">Florete Femenino Infantil B <span class="pip pip-t">★</span></div>
+                                <div class="res">12 tiradores · Diploma Nacional Top-8</div>
+                            </div>
+                            <div>
+                                <div class="rpv">14</div>
+                                <div class="rpl">pts ranking</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ecard-foot">
+                        <div>
+                            <div class="efl">Medallas</div>
+                            <div style="margin-top:4px;"><span class="pip pip-s">S</span></div>
+                        </div>
+                        <div style="text-align:right;">
+                            <div class="efl">Pts. Ranking Total</div>
+                            <div class="efv">40</div>
+                        </div>
+                    </div>
+                    <div class="ecard-note">Subcampeona nacional en Infantil A y diploma en Infantil B. Pilar del
+                        florete femenino del club con clara proyección hacia la élite.</div>
+                </div>
+
+                <!-- Luciana Cruz -->
+                <div class="ecard">
+                    <div class="ecard-top">
+                        <div>
+                            <div class="ecard-name">Luciana Cruz</div>
+                            <div class="ecard-meta">Femenino · Sable · Infantil A · Mini · Cabudare</div>
+                        </div>
+                        <div class="ecard-ico"><img src="assets/logo-cec-2022-b.png" alt="CEC"
+                                class="cec-logo card-logo"></div>
+                    </div>
+                    <div class="ecard-results">
+                        <div class="rrow">
+                            <span class="rpos p3">3°</span>
+                            <div>
+                                <div class="ren">Sable Femenino Infantil A <span class="pip pip-b">B</span></div>
+                                <div class="res">11 tiradores · Medalla de Bronce Nacional</div>
+                            </div>
+                            <div>
+                                <div class="rpv">20</div>
+                                <div class="rpl">pts ranking</div>
+                            </div>
+                        </div>
+                        <div class="rrow">
+                            <span class="rpos mini">●</span>
+                            <div>
+                                <div class="ren">Sable Mixto Mini</div>
+                                <div class="res">Participación formativa · Sin clasificación oficial</div>
+                            </div>
+                            <div>
+                                <div class="rpv" style="color:var(--muted);">—</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ecard-foot">
+                        <div>
+                            <div class="efl">Medallas</div>
+                            <div style="margin-top:4px;"><span class="pip pip-b">B</span></div>
+                        </div>
+                        <div style="text-align:right;">
+                            <div class="efl">Pts. Ranking Total</div>
+                            <div class="efv">20</div>
+                        </div>
+                    </div>
+                    <div class="ecard-note">Bronce en sable femenino. Participación simultánea en Mini refuerza su
+                        desarrollo integral. Clave para el relevo del equipo de sable.</div>
+                </div>
+
+                <!-- Edrik -->
+                <div class="ecard">
+                    <div class="ecard-top">
+                        <div>
+                            <div class="ecard-name">Edrik González</div>
+                            <div class="ecard-meta">Masculino · Sable · Infantil A · Mini · Cabudare</div>
+                        </div>
+                        <div class="ecard-ico"><img src="assets/logo-cec-2022-b.png" alt="CEC"
+                                class="cec-logo card-logo"></div>
+                    </div>
+                    <div class="ecard-results">
+                        <div class="rrow">
+                            <span class="rpos p3">3°</span>
+                            <div>
+                                <div class="ren">Sable Masculino Infantil A <span class="pip pip-b">B</span></div>
+                                <div class="res">12 tiradores · Medalla de Bronce Nacional</div>
+                            </div>
+                            <div>
+                                <div class="rpv">20</div>
+                                <div class="rpl">pts ranking</div>
+                            </div>
+                        </div>
+                        <div class="rrow">
+                            <span class="rpos mini">●</span>
+                            <div>
+                                <div class="ren">Sable Mixto Mini</div>
+                                <div class="res">Participación formativa · Sin clasificación oficial</div>
+                            </div>
+                            <div>
+                                <div class="rpv" style="color:var(--muted);">—</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ecard-foot">
+                        <div>
+                            <div class="efl">Medallas</div>
+                            <div style="margin-top:4px;"><span class="pip pip-b">B</span></div>
+                        </div>
+                        <div style="text-align:right;">
+                            <div class="efl">Pts. Ranking Total</div>
+                            <div class="efv">20</div>
+                        </div>
+                    </div>
+                    <div class="ecard-note">Bronce en sable masculino. Su doble participación en Mini fortalece su
+                        desarrollo como futuro competidor élite del club.</div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- DIRECTORIO -->
+    <section class="section" id="directorio">
+        <div class="wrap">
+            <div class="sh fi">
+                <div class="sh-label">Registro Completo Verificado</div>
+                <h2 class="sh-title">DIRECTORIO<br>MAESTRO</h2>
+                <p class="sh-desc">Todas las participaciones del CEC en el CN 2025–2026. Datos extraídos de resultados
+                    oficiales de la Federación Venezolana de Esgrima (FVE).</p>
+            </div>
+            <div class="twrap fi">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Atleta</th>
+                            <th>Arma</th>
+                            <th>Categoría</th>
+                            <th>Posición</th>
+                            <th>Campo</th>
+                            <th>Pts. Ranking</th>
+                            <th>Estatus</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="tdn">Silvana García</td>
+                            <td style="color:var(--sable);font-weight:600;">Sable</td>
+                            <td>Infantil A</td>
+                            <td><span class="chip cg">🥇 1° Lugar</span></td>
+                            <td>11 tiradores</td>
+                            <td style="color:var(--accent2);font-weight:700;">32 pts</td>
+                            <td><span class="chip cg">Campeona</span></td>
+                        </tr>
+                        <tr>
+                            <td class="tdn">Silvana García</td>
+                            <td style="color:var(--sable);font-weight:600;">Sable</td>
+                            <td>Infantil B</td>
+                            <td><span class="chip cs">🥈 2° Lugar</span></td>
+                            <td>7 tiradores</td>
+                            <td style="color:var(--accent2);font-weight:700;">26 pts</td>
+                            <td><span class="chip cs">Subcampeona</span></td>
+                        </tr>
+                        <tr>
+                            <td class="tdn">Edrik González</td>
+                            <td style="color:var(--sable);font-weight:600;">Sable</td>
+                            <td>Infantil A</td>
+                            <td><span class="chip cb">🥉 3° Lugar</span></td>
+                            <td>12 tiradores</td>
+                            <td style="color:var(--accent2);font-weight:700;">20 pts</td>
+                            <td><span class="chip cb">Medallista</span></td>
+                        </tr>
+                        <tr style="opacity:.7;">
+                            <td>Edrik González</td>
+                            <td style="color:var(--sable);">Sable</td>
+                            <td>Mini</td>
+                            <td><span class="chip cm">● Presente</span></td>
+                            <td>12 tiradores</td>
+                            <td style="color:var(--muted);">— pts</td>
+                            <td><span class="chip cm">Formativo</span></td>
+                        </tr>
+                        <tr>
+                            <td class="tdn">Luciana Cruz</td>
+                            <td style="color:var(--sable);font-weight:600;">Sable</td>
+                            <td>Infantil A</td>
+                            <td><span class="chip cb">🥉 3° Lugar</span></td>
+                            <td>11 tiradores</td>
+                            <td style="color:var(--accent2);font-weight:700;">20 pts</td>
+                            <td><span class="chip cb">Medallista</span></td>
+                        </tr>
+                        <tr style="opacity:.7;">
+                            <td>Luciana Cruz</td>
+                            <td style="color:var(--sable);">Sable</td>
+                            <td>Mini</td>
+                            <td><span class="chip cm">● Presente</span></td>
+                            <td>12 tiradores</td>
+                            <td style="color:var(--muted);">— pts</td>
+                            <td><span class="chip cm">Formativo</span></td>
+                        </tr>
+                        <tr>
+                            <td class="tdn">Franki Mejías</td>
+                            <td style="color:var(--sable);font-weight:600;">Sable</td>
+                            <td>Infantil A</td>
+                            <td><span class="chip ct">7° Lugar</span></td>
+                            <td>12 tiradores</td>
+                            <td style="color:var(--accent);">14 pts</td>
+                            <td><span class="chip ct">Top-8</span></td>
+                        </tr>
+                        <tr>
+                            <td class="tdn">Franki Mejías</td>
+                            <td style="color:var(--sable);font-weight:600;">Sable</td>
+                            <td>Infantil B</td>
+                            <td><span class="chip ct">8° Lugar</span></td>
+                            <td>11 tiradores</td>
+                            <td style="color:var(--accent);">8 pts</td>
+                            <td><span class="chip ct">Top-8</span></td>
+                        </tr>
+                        <tr>
+                            <td class="tdn">Alejandro Rodríguez</td>
+                            <td style="color:var(--sable);font-weight:600;">Sable</td>
+                            <td>Infantil B</td>
+                            <td><span class="chip cn">11° Lugar</span></td>
+                            <td>11 tiradores</td>
+                            <td style="color:var(--muted);">8 pts</td>
+                            <td><span class="chip cn">Competitivo</span></td>
+                        </tr>
+                        <tr style="opacity:.7;">
+                            <td>Ana Pérez</td>
+                            <td style="color:var(--sable);">Sable</td>
+                            <td>Mini A</td>
+                            <td><span class="chip cm">● Presente</span></td>
+                            <td>12 tiradores</td>
+                            <td style="color:var(--muted);">— pts</td>
+                            <td><span class="chip cm">Formativo</span></td>
+                        </tr>
+                        <tr style="opacity:.7;">
+                            <td>Fabrizio Quevedo</td>
+                            <td style="color:var(--sable);">Sable</td>
+                            <td>Mini</td>
+                            <td><span class="chip cm">● Presente</span></td>
+                            <td>12 tiradores</td>
+                            <td style="color:var(--muted);">— pts</td>
+                            <td><span class="chip cm">Formativo</span></td>
+                        </tr>
+                        <tr style="opacity:.7;">
+                            <td>Joaquín Linarez</td>
+                            <td style="color:var(--sable);">Sable</td>
+                            <td>Mini</td>
+                            <td><span class="chip cm">● Presente</span></td>
+                            <td>12 tiradores</td>
+                            <td style="color:var(--muted);">— pts</td>
+                            <td><span class="chip cm">Formativo</span></td>
+                        </tr>
+                        <tr style="opacity:.7;">
+                            <td>Axel Mejías</td>
+                            <td style="color:var(--sable);">Sable</td>
+                            <td>Mini</td>
+                            <td><span class="chip cm">● Presente</span></td>
+                            <td>12 tiradores</td>
+                            <td style="color:var(--muted);">— pts</td>
+                            <td><span class="chip cm">Formativo</span></td>
+                        </tr>
+                        <tr style="opacity:.7;">
+                            <td>Luciana Violeta Cruz Monagas</td>
+                            <td style="color:var(--sable);">Sable</td>
+                            <td>Mini A</td>
+                            <td><span class="chip cm">● Presente</span></td>
+                            <td>12 tiradores</td>
+                            <td style="color:var(--muted);">— pts</td>
+                            <td><span class="chip cm">Formativo</span></td>
+                        </tr>
+                        <tr>
+                            <td class="tdn">Elisa Figueredo</td>
+                            <td style="color:var(--florete);font-weight:600;">Florete</td>
+                            <td>Infantil A</td>
+                            <td><span class="chip cs">🥈 2° Lugar</span></td>
+                            <td>8 tiradores</td>
+                            <td style="color:var(--accent2);font-weight:700;">26 pts</td>
+                            <td><span class="chip cs">Subcampeona</span></td>
+                        </tr>
+                        <tr>
+                            <td class="tdn">Elisa Figueredo</td>
+                            <td style="color:var(--florete);font-weight:600;">Florete</td>
+                            <td>Infantil B</td>
+                            <td><span class="chip ct">6° Lugar</span></td>
+                            <td>12 tiradores</td>
+                            <td style="color:var(--accent);">14 pts</td>
+                            <td><span class="chip ct">Diploma Nac.</span></td>
+                        </tr>
+                        <tr>
+                            <td class="tdn">Perla Cruz</td>
+                            <td style="color:var(--florete);font-weight:600;">Florete</td>
+                            <td>Infantil A</td>
+                            <td><span class="chip ct">6° Lugar</span></td>
+                            <td>8 tiradores</td>
+                            <td style="color:var(--accent);">14 pts</td>
+                            <td><span class="chip ct">Diploma Nac.</span></td>
+                        </tr>
+                        <tr>
+                            <td class="tdn">Perla Cruz</td>
+                            <td style="color:var(--florete);font-weight:600;">Florete</td>
+                            <td>Infantil B</td>
+                            <td><span class="chip ct">8° Lugar</span></td>
+                            <td>12 tiradores</td>
+                            <td style="color:var(--accent);">8 pts</td>
+                            <td><span class="chip ct">Diploma Nac.</span></td>
+                        </tr>
+                        <tr>
+                            <td class="tdn">Joaquín Pérez</td>
+                            <td style="color:var(--florete);font-weight:600;">Florete</td>
+                            <td>Infantil A</td>
+                            <td><span class="chip ct">7° Lugar</span></td>
+                            <td>9 tiradores</td>
+                            <td style="color:var(--accent);">8 pts</td>
+                            <td><span class="chip ct">Diploma Nac.</span></td>
+                        </tr>
+                        <tr>
+                            <td class="tdn">Joaquín Pérez</td>
+                            <td style="color:var(--florete);font-weight:600;">Florete</td>
+                            <td>Infantil B</td>
+                            <td><span class="chip ct">5° Lugar</span></td>
+                            <td>8 tiradores</td>
+                            <td style="color:var(--accent);">14 pts</td>
+                            <td><span class="chip ct">Diploma Nac.</span></td>
+                        </tr>
+                        <tr>
+                            <td class="tdn">Wanda Benítez</td>
+                            <td style="color:var(--florete);font-weight:600;">Florete</td>
+                            <td>Infantil B</td>
+                            <td><span class="chip cn">12° Lugar</span></td>
+                            <td>12 tiradores</td>
+                            <td style="color:var(--muted);">8 pts</td>
+                            <td><span class="chip cn">Competitivo</span></td>
+                        </tr>
+                        <tr>
+                            <td class="tdn">Wanda Benítez</td>
+                            <td style="color:var(--florete);font-weight:600;">Florete</td>
+                            <td>Precadete</td>
+                            <td><span class="chip cn">10° Lugar</span></td>
+                            <td>13 tiradores</td>
+                            <td style="color:var(--muted);">8 pts</td>
+                            <td><span class="chip cn">Competitivo</span></td>
+                        </tr>
+                        <tr style="opacity:.7;">
+                            <td>Gerónimo Barrios</td>
+                            <td style="color:var(--florete);">Florete</td>
+                            <td>Mini</td>
+                            <td><span class="chip cm">● Presente</span></td>
+                            <td>11 tiradores</td>
+                            <td style="color:var(--muted);">— pts</td>
+                            <td><span class="chip cm">Formativo</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="tfn">Fuente: Federación Venezolana de Esgrima (fencingven.com) · Resultados oficiales CN
+                    2025–2026 · La categoría Mini
+                    solo realiza ronda de poule y no genera puntos de ranking según el reglamento FVE.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ENTRENADORAS -->
+    <section class="section" id="entrenadoras">
+        <div class="wrap">
+            <div class="sh fi">
+                <div class="sh-label">Cuerpo Técnico</div>
+                <h2 class="sh-title">ESTADÍSTICAS<br>POR ENTRENADORA</h2>
+                <p class="sh-desc">Análisis del rendimiento de cada atleta bajo la dirección técnica de las entrenadoras
+                    del CEC en el CN 2025–2026.</p>
+            </div>
+            <div class="cgrid fi">
+
+                <!-- Tibisay -->
+                <div class="ccard">
+                    <div class="ccard-head">
+                        <div>
+                            <div class="ccard-arm as">Entrenadora · Sable</div>
+                            <div class="ccard-name">Tibisay Reinoso</div>
+                            <div class="ccard-role">9 atletas · Sable</div>
+                        </div>
+                        <div class="cstats">
+                            <div>
+                                <div class="csv" style="color:var(--gold);">3</div>
+                                <div class="csl">Medallas</div>
+                            </div>
+                            <div>
+                                <div class="csv" style="color:var(--accent2);">86%</div>
+                                <div class="csl">Top-8</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="cath">
+                            <div class="cav" style="border-color:rgba(212,160,23,.4);color:var(--gold);">SG</div>
+                            <div class="ci">
+                                <div class="cin">Silvana García</div>
+                                <div class="cid">Infantil A (1°) + Infantil B (2°) · 100% premiada</div>
+                            </div>
+                            <div class="cpips"><span class="pip pip-g">G</span><span class="pip pip-s">S</span></div>
+                        </div>
+                        <div class="cath">
+                            <div class="cav" style="border-color:rgba(181,113,58,.4);color:var(--bronze);">EG</div>
+                            <div class="ci">
+                                <div class="cin">Edrik González</div>
+                                <div class="cid">Infantil A (3°) + Mini · Bronce Nacional</div>
+                            </div>
+                            <div class="cpips"><span class="pip pip-b">B</span></div>
+                        </div>
+                        <div class="cath">
+                            <div class="cav" style="border-color:rgba(181,113,58,.4);color:var(--bronze);">LC</div>
+                            <div class="ci">
+                                <div class="cin">Luciana Cruz</div>
+                                <div class="cid">Infantil A (3°) + Mini · Bronce Nacional</div>
+                            </div>
+                            <div class="cpips"><span class="pip pip-b">B</span></div>
+                        </div>
+                        <div class="cath">
+                            <div class="cav">FM</div>
+                            <div class="ci">
+                                <div class="cin">Franki Mejías</div>
+                                <div class="cid">Infantil A (7°) + Infantil B (8°) · Top-8 doble</div>
+                            </div>
+                            <div class="cpips"><span class="pip pip-t">★</span><span class="pip pip-t">★</span></div>
+                        </div>
+                        <div class="cath">
+                            <div class="cav">AR</div>
+                            <div class="ci">
+                                <div class="cin">Alejandro Rodríguez</div>
+                                <div class="cid">Infantil B (11°) · Inicio ciclo competitivo</div>
+                            </div>
+                            <div class="cpips"><span class="chip cn" style="font-size:10px;">11°</span></div>
+                        </div>
+                        <div class="cath" style="opacity:.6;">
+                            <div class="cav" style="color:var(--accent2);">AP</div>
+                            <div class="ci">
+                                <div class="cin">Ana Pérez</div>
+                                <div class="cid">Mini A · Etapa formativa</div>
+                            </div>
+                            <div class="cpips"><span class="chip cm" style="font-size:10px;">Mini</span></div>
+                        </div>
+                        <div class="cath" style="opacity:.6;">
+                            <div class="cav" style="color:var(--accent2);">FQ</div>
+                            <div class="ci">
+                                <div class="cin">Fabrizio Quevedo</div>
+                                <div class="cid">Mini · Etapa formativa</div>
+                            </div>
+                            <div class="cpips"><span class="chip cm" style="font-size:10px;">Mini</span></div>
+                        </div>
+                        <div class="cath" style="opacity:.6;">
+                            <div class="cav" style="color:var(--accent2);">JL</div>
+                            <div class="ci">
+                                <div class="cin">Joaquín Linarez</div>
+                                <div class="cid">Mini · Etapa formativa</div>
+                            </div>
+                            <div class="cpips"><span class="chip cm" style="font-size:10px;">Mini</span></div>
+                        </div>
+                        <div class="cath" style="opacity:.6;">
+                            <div class="cav" style="color:var(--accent2);">AM</div>
+                            <div class="ci">
+                                <div class="cin">Axel Mejías</div>
+                                <div class="cid">Mini · Etapa formativa</div>
+                            </div>
+                            <div class="cpips"><span class="chip cm" style="font-size:10px;">Mini</span></div>
+                        </div>
+                    </div>
+                    <div class="canal">El equipo de Sable fue el eje del medallero del CEC. Silvana García representó el
+                        pico de rendimiento del ciclo. La base formativa (Luciana, Edrik) asegura el relevo para el
+                        próximo ciclo competitivo.</div>
+                </div>
+
+                <!-- Josefina -->
+                <div class="ccard">
+                    <div class="ccard-head">
+                        <div>
+                            <div class="ccard-arm af">Entrenadora · Florete</div>
+                            <div class="ccard-name">Josefina Escalona</div>
+                            <div class="ccard-role">5 atletas · Florete</div>
+                        </div>
+                        <div class="cstats">
+                            <div>
+                                <div class="csv" style="color:var(--silver);">1</div>
+                                <div class="csl">Medallas</div>
+                            </div>
+                            <div>
+                                <div class="csv" style="color:var(--accent);">75%</div>
+                                <div class="csl">Top-8</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="cath">
+                            <div class="cav" style="border-color:rgba(155,170,181,.4);color:var(--silver);">EF</div>
+                            <div class="ci">
+                                <div class="cin">Elisa Figueredo</div>
+                                <div class="cid">Inf A (2°, Plata) + Inf B (6°) · Medalla + Diploma</div>
+                            </div>
+                            <div class="cpips"><span class="pip pip-s">S</span><span class="pip pip-t">★</span></div>
+                        </div>
+                        <div class="cath">
+                            <div class="cav" style="color:var(--accent);">PC</div>
+                            <div class="ci">
+                                <div class="cin">Perla Cruz</div>
+                                <div class="cid">Inf A (6°) + Inf B (8°) · Top-8 en ambas</div>
+                            </div>
+                            <div class="cpips"><span class="pip pip-t">★</span><span class="pip pip-t">★</span></div>
+                        </div>
+                        <div class="cath">
+                            <div class="cav" style="color:var(--accent);">JP</div>
+                            <div class="ci">
+                                <div class="cin">Joaquín Pérez</div>
+                                <div class="cid">Inf A (7°) → Inf B (5°) · Progresión positiva</div>
+                            </div>
+                            <div class="cpips"><span class="pip pip-t">★</span><span class="pip pip-t">★</span></div>
+                        </div>
+                        <div class="cath">
+                            <div class="cav">WB</div>
+                            <div class="ci">
+                                <div class="cin">Wanda Benítez</div>
+                                <div class="cid">Inf B (12°) + Precadete (10°) · Doble categoría</div>
+                            </div>
+                            <div class="cpips"><span class="chip cn" style="font-size:10px;">10°</span></div>
+                        </div>
+                        <div class="cath" style="opacity:.6;">
+                            <div class="cav" style="color:var(--accent2);">GB</div>
+                            <div class="ci">
+                                <div class="cin">Gerónimo Barrios</div>
+                                <div class="cid">Mini Florete · Etapa formativa</div>
+                            </div>
+                            <div class="cpips"><span class="chip cm" style="font-size:10px;">Mini</span></div>
+                        </div>
+                    </div>
+                    <div class="canal">El equipo de Florete aportó el mayor volumen de diplomas Top-8. Elisa Figueredo,
+                        Perla Cruz y Joaquín Pérez conforman una base técnica sólida. Wanda Benítez compitió en dos
+                        categorías. Joaquín Pérez mejoró de 7° a 5° entre categorías — indicador de progresión clara.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FORMACIÓN -->
+    <section class="section" id="formacion">
+        <div class="wrap">
+            <div class="sh fi">
+                <div class="sh-label">Semillero · Mini / Formativo</div>
+                <h2 class="sh-title">BASE<br>GENERACIONAL</h2>
+                <p class="sh-desc">Atletas en etapa formativa. La categoría Mini solo realiza ronda de poule y no genera
+                    puntos de ranking. Representan el relevo generacional del club.</p>
+            </div>
+            <div class="sgrid fi">
+                <div class="scard">
+                    <div class="sav" style="color:var(--florete);">GB</div>
+                    <div class="snm">Gerónimo Barrios</div>
+                    <div class="sdt">Florete Mini<br>Josefina Escalona<br>9 años</div>
+                </div>
+                <div class="scard">
+                    <div class="sav">FQ</div>
+                    <div class="snm">Fabrizio Quevedo</div>
+                    <div class="sdt">Sable Mini<br>Tibisay Reinoso<br>7 años</div>
+                </div>
+                <div class="scard">
+                    <div class="sav">JL</div>
+                    <div class="snm">Joaquín Linarez</div>
+                    <div class="sdt">Sable Mini<br>Tibisay Reinoso<br>6 años</div>
+                </div>
+                <div class="scard">
+                    <div class="sav" style="color:var(--bronze);">LC</div>
+                    <div class="snm">Luciana Cruz</div>
+                    <div class="sdt">Sable Mini + Inf A<br>Tibisay Reinoso<br>🥉 Medallista</div>
+                </div>
+                <div class="scard">
+                    <div class="sav" style="color:var(--bronze);">EG</div>
+                    <div class="snm">Edrik González</div>
+                    <div class="sdt">Sable Mini + Inf A<br>Tibisay Reinoso<br>🥉 Medallista</div>
+                </div>
+                <div class="scard">
+                    <div class="sav">AP</div>
+                    <div class="snm">Ana Pérez</div>
+                    <div class="sdt">Sable Mini A<br>Tibisay Reinoso<br>9 años</div>
+                </div>
+                <div class="scard">
+                    <div class="sav">LV</div>
+                    <div class="snm">Luciana V. Cruz M.</div>
+                    <div class="sdt">Sable Mini A<br>Tibisay Reinoso<br>8 años</div>
+                </div>
+                <div class="scard">
+                    <div class="sav">AM</div>
+                    <div class="snm">Axel Mejías</div>
+                    <div class="sdt">Sable Mini<br>Tibisay Reinoso<br>Formativo</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LARA -->
+    <section class="section" id="lara">
+        <div class="wrap">
+            <div class="sh fi">
+                <div class="sh-label">Contexto Nacional · Estado Lara</div>
+                <h2 class="sh-title">MEDALLERO<br>GENERAL CN 2026</h2>
+                <p class="sh-desc">Posición del Estado Lara según el sistema olímpico: prioridad Oro → Plata → Bronce.
+                    Solo pruebas individuales; la categoría Mini no contabiliza.</p>
+            </div>
+
+            <div class="lbanner fi">
+                <div class="lbanner-t">Estado Lara · 2° Lugar Nacional (Sistema Olímpico)</div>
+                <div class="lbanner-b">Con <strong>6 oros, 5 platas y 9 bronces</strong> (total: 20 medallas), Lara
+                    ocupa el <strong>2° lugar</strong>: empata en oros con Caracas (6 c/u), pero supera en platas (5 vs
+                    4). Lara posee el <strong>mayor total de medallas</strong> y los <strong>mayores puntos de
+                        ranking</strong> del campeonato. El Club Esgrima Cabudare aportó <strong>1 oro, 2 platas y 2
+                        bronces</strong> al medallero del estado.</div>
+            </div>
+
+            <h3 style="font-family:var(--fd);font-size:28px;letter-spacing:2px;color:#fff;margin-bottom:20px;"
+                class="fi">CONTRIBUCIÓN CEC AL MEDALLERO DE LARA</h3>
+
+            <div class="ctgrid fi">
+                <div class="ctcell">
+                    <div class="ctmed">🥇</div>
+                    <div class="ctfrac" style="color:var(--gold);">1 / 6</div>
+                    <div class="ctpct">17% de los Oros</div>
+                    <div class="ctbar">
+                        <div class="ctfill" style="width:17%;background:var(--gold);"></div>
+                    </div>
+                    <div class="ctwho">Silvana García<br>Sable Fem. Inf. A</div>
+                </div>
+                <div class="ctcell">
+                    <div class="ctmed">🥈</div>
+                    <div class="ctfrac" style="color:var(--silver);">2 / 5</div>
+                    <div class="ctpct">40% de las Platas</div>
+                    <div class="ctbar">
+                        <div class="ctfill" style="width:40%;background:var(--silver);"></div>
+                    </div>
+                    <div class="ctwho">Silvana García (Sab B)<br>Elisa Figueredo (Flo A)</div>
+                </div>
+                <div class="ctcell">
+                    <div class="ctmed">🥉</div>
+                    <div class="ctfrac" style="color:var(--bronze);">2 / 9</div>
+                    <div class="ctpct">22% de los Bronces</div>
+                    <div class="ctbar">
+                        <div class="ctfill" style="width:22%;background:var(--bronze);"></div>
+                    </div>
+                    <div class="ctwho">Edrik González (Sab Masc A)<br>Luciana Cruz (Sab Fem A)</div>
+                </div>
+            </div>
+
+            <div class="callout c-blue fi">
+                <div class="callout-icon">📊</div>
+                <div>El CEC aportó <strong>5 de las 20 medallas del Estado Lara (25%)</strong>, siendo el club con mayor
+                    contribución individual al medallero larense, compitiendo únicamente en Sable y Florete.</div>
+            </div>
+
+            <div class="twrap fi">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Pos.</th>
+                            <th>Estado</th>
+                            <th>🥇 Oro</th>
+                            <th>🥈 Plata</th>
+                            <th>🥉 Bronce</th>
+                            <th>Total</th>
+                            <th>Pts. Ranking</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="pos-n p1n">1</span></td>
+                            <td>
+                                <div class="sn">Carabobo <span class="tag">CAR</span></div>
+                                <div class="snsub">Sede · 7 oros · 1ª prioridad</div>
+                            </td>
+                            <td><span class="mg">7</span></td>
+                            <td><span class="ms">4</span></td>
+                            <td><span class="mb">7</span></td>
+                            <td><strong>18</strong></td>
+                            <td><span class="pts">406</span></td>
+                        </tr>
+                        <tr class="lr">
+                            <td><span class="pos-n p2n la">2</span></td>
+                            <td>
+                                <div class="sn la">★ Lara <span class="tag"
+                                        style="color:var(--accent);border-color:rgba(62,123,250,.3);">LAR</span></div>
+                                <div class="snsub" style="color:var(--accent);">6 oros + 5 platas → supera a CCS en
+                                    platas</div>
+                            </td>
+                            <td><span class="mg">6</span></td>
+                            <td><span class="ms" style="color:var(--accent);font-size:18px;font-weight:700;">5</span>
+                            </td>
+                            <td><span class="mb">9</span></td>
+                            <td><strong class="la" style="font-size:16px;">20</strong></td>
+                            <td><span class="pts" style="font-size:28px;">~430</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="pos-n p3n">3</span></td>
+                            <td>
+                                <div class="sn">Caracas / D.C. <span class="tag">CCS</span></div>
+                                <div class="snsub">6 oros + 4 platas → pierde desempate con LAR</div>
+                            </td>
+                            <td><span class="mg">6</span></td>
+                            <td><span class="ms">4</span></td>
+                            <td><span class="mb">8</span></td>
+                            <td><strong>18</strong></td>
+                            <td><span class="pts">388</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="pos-n pnn">4</span></td>
+                            <td>
+                                <div class="sn">Falcón <span class="tag">FAL</span></div>
+                            </td>
+                            <td><span class="mg">5</span></td>
+                            <td><span class="ms">3</span></td>
+                            <td><span class="mb">4</span></td>
+                            <td><strong>12</strong></td>
+                            <td><span class="pts">286</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="pos-n pnn">5</span></td>
+                            <td>
+                                <div class="sn">Bolívar <span class="tag">BOL</span></div>
+                            </td>
+                            <td><span class="mg">3</span></td>
+                            <td><span class="ms">2</span></td>
+                            <td><span class="mb">3</span></td>
+                            <td><strong>8</strong></td>
+                            <td><span class="pts">192</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="pos-n pnn">6</span></td>
+                            <td>
+                                <div class="sn">Yaracuy <span class="tag">YAR</span></div>
+                            </td>
+                            <td><span class="mg">1</span></td>
+                            <td><span class="ms">3</span></td>
+                            <td><span class="mb">2</span></td>
+                            <td><strong>6</strong></td>
+                            <td><span class="pts">128</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="pos-n pnn">7</span></td>
+                            <td>
+                                <div class="sn">Aragua <span class="tag">ARA</span></div>
+                            </td>
+                            <td><span class="mg">0</span></td>
+                            <td><span class="ms">1</span></td>
+                            <td><span class="mb">0</span></td>
+                            <td><strong>1</strong></td>
+                            <td><span class="pts">56</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="pos-n pnn">8</span></td>
+                            <td>
+                                <div class="sn">Barinas <span class="tag">BAR</span></div>
+                            </td>
+                            <td><span class="mg">0</span></td>
+                            <td><span class="ms">0</span></td>
+                            <td><span class="mb">1</span></td>
+                            <td><strong>1</strong></td>
+                            <td><span class="pts">42</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="pos-n pnn">9</span></td>
+                            <td>
+                                <div class="sn">Guárico <span class="tag">GUA</span></div>
+                            </td>
+                            <td><span class="mg">0</span></td>
+                            <td><span class="ms">0</span></td>
+                            <td><span class="mb">0</span></td>
+                            <td><strong>0</strong></td>
+                            <td><span class="pts">16</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="pos-n pnn">10</span></td>
+                            <td>
+                                <div class="sn">Miranda <span class="tag">MIR</span></div>
+                            </td>
+                            <td><span class="mg">0</span></td>
+                            <td><span class="ms">0</span></td>
+                            <td><span class="mb">0</span></td>
+                            <td><strong>0</strong></td>
+                            <td><span class="pts">8</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="pos-n pnn">11</span></td>
+                            <td>
+                                <div class="sn">Mérida <span class="tag">MER</span></div>
+                            </td>
+                            <td><span class="mg">0</span></td>
+                            <td><span class="ms">0</span></td>
+                            <td><span class="mb">0</span></td>
+                            <td><strong>0</strong></td>
+                            <td><span class="pts">6</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="pos-n pnn">12</span></td>
+                            <td>
+                                <div class="sn">Fed. Venezolana <span class="tag">FVE</span></div>
+                            </td>
+                            <td><span class="mg">0</span></td>
+                            <td><span class="ms">0</span></td>
+                            <td><span class="mb">0</span></td>
+                            <td><strong>0</strong></td>
+                            <td><span class="pts">8</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="tfn">Sistema olímpico: 1ª prioridad Oro → 2ª Plata → 3ª Bronce. LAR y CCS tienen igual
+                    número de oros (6); LAR supera a CCS en platas (5 vs 4) → LAR = 2°. El total de medallas no
+                    determina el orden.</div>
+            </div>
+
+            <div class="div"></div>
+
+            <div class="sh fi">
+                <div class="sh-label">Análisis Estratégico</div>
+                <h2 class="sh-title">EVALUACIÓN<br>DEL CLUB</h2>
+            </div>
+
+            <div class="evgrid fi">
+                <div class="evcard">
+                    <div class="evtitle"><span>✅</span><span style="color:var(--accent2);">Fortalezas</span></div>
+                    <div class="ei">
+                        <div class="dot dg"></div><span>Silvana García es la atleta de sable femenino más dominante del
+                            país: oro en A y plata en B en el mismo campeonato.</span>
+                    </div>
+                    <div class="ei">
+                        <div class="dot dg"></div><span>100% de los atletas de competencia (excluyendo Mini) lograron
+                            posiciones Top-8 o medallistas.</span>
+                    </div>
+                    <div class="ei">
+                        <div class="dot dg"></div><span>5 medallas con solo 2 armas posicionan al CEC como el club más
+                            productivo del Estado Lara.</span>
+                    </div>
+                    <div class="ei">
+                        <div class="dot dg"></div><span>Cantera Mini sólida con 8 atletas; garantiza el relevo
+                            generacional para los próximos ciclos.</span>
+                    </div>
+                    <div class="ei">
+                        <div class="dot dg"></div><span>Múltiples atletas compitieron en doble categoría, maximizando
+                            puntos de ranking para el estado.</span>
+                    </div>
+                </div>
+                <div class="evcard">
+                    <div class="evtitle"><span>📍</span><span style="color:var(--gold);">Áreas de Desarrollo</span>
+                    </div>
+                    <div class="ei">
+                        <div class="dot dy"></div><span>Florete masculino sin opciones de podio; Joaquín Pérez progresa
+                            (7° → 5°) pero requiere mayor trabajo en fases de tablou.</span>
+                    </div>
+                    <div class="ei">
+                        <div class="dot dy"></div><span>Alejandro Rodríguez finalizó 11° en Sable Inf. B; requiere mayor
+                            volumen de competencia oficial.</span>
+                    </div>
+                    <div class="ei">
+                        <div class="dot dy"></div><span>42% de los puntos del club provienen de Silvana García;
+                            necesario desarrollar más atletas de élite.</span>
+                    </div>
+                    <div class="ei">
+                        <div class="dot dy"></div><span>El club no participa en Espada, siendo el arma más productiva
+                            del Estado Lara con 11 medallas totales.</span>
+                    </div>
+                    <div class="ei">
+                        <div class="dot dy"></div><span>Varios atletas Mini requieren equipamiento completo (máscara,
+                            chaquetilla, cable) para las próximas temporadas.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scorebox fi">
+                <div>
+                    <div
+                        style="font-family:var(--fm);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;">
+                        Calificación · CEC CN 2026</div>
+                    <div class="scoregrade">A</div>
+                </div>
+                <div class="scorer">
+                    <div class="scorem">Métricas de Rendimiento</div>
+                    <div class="metric">
+                        <div class="mhd"><span>Efectividad técnica (73% Top-8)</span><span class="mv"
+                                style="color:var(--accent2);">9/10</span></div>
+                        <div class="mbar">
+                            <div class="mfill fv" style="width:90%;"></div>
+                        </div>
+                    </div>
+                    <div class="metric">
+                        <div class="mhd"><span>Profundidad cantera Mini (8 atletas)</span><span class="mv"
+                                style="color:var(--accent2);">9/10</span></div>
+                        <div class="mbar">
+                            <div class="mfill fv" style="width:90%;"></div>
+                        </div>
+                    </div>
+                    <div class="metric">
+                        <div class="mhd"><span>Aporte al medallero de LAR (25%)</span><span class="mv"
+                                style="color:var(--gold);">8/10</span></div>
+                        <div class="mbar">
+                            <div class="mfill fg" style="width:80%;"></div>
+                        </div>
+                    </div>
+                    <div class="metric">
+                        <div class="mhd"><span>Diversidad de armas competidas</span><span class="mv"
+                                style="color:var(--silver);">6/10</span></div>
+                        <div class="mbar">
+                            <div class="mfill fsi" style="width:60%;"></div>
+                        </div>
+                    </div>
+                    <div class="metric">
+                        <div class="mhd"><span>Rendimiento masculino de competencia</span><span class="mv"
+                                style="color:var(--bronze);">5/10</span></div>
+                        <div class="mbar">
+                            <div class="mfill fbr" style="width:50%;"></div>
+                        </div>
+                    </div>
+                    <div class="scoresum">El Club Esgrima Cabudare es <strong>el club más medallista del Estado
+                            Lara</strong> y uno de los más relevantes del campeonato nacional 2026. Con <strong>1 oro, 2
+                            platas y 2 bronces</strong>, aportó el 25% de las medallas del estado compitiendo solo en
+                        dos armas. La solidez de Silvana García, la proyección de Elisa Figueredo y la progresión de
+                        Joaquín Pérez, junto a una cantera Mini de 8 atletas, posicionan al CEC en un ciclo ascendente.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="wrap">
+            <div class="footer-brand">CLUB ESGRIMA CABUDARE</div>
+            <div class="footer-meta">
+                Campeonato Nacional Infantil y Precadete 2025 / 2026 &nbsp;·&nbsp; Valencia, Estado Carabobo<br>
+                Datos basados en resultados oficiales FVE <a href="https://fencingven.com/" target="_blank"
+                    rel="noopener noreferrer">https://fencingven.com/</a><br>
+                <a href="https://tepuy.site" target="_blank" rel="noopener noreferrer">TEPUY</a> · All rights reserved ©
+                2026
+            </div>
+        </div>
+    </footer>
+
+    <script data-cfasync="false">
+        (function () {
+            var io = new IntersectionObserver(function (e) { e.forEach(function (x) { if (x.isIntersecting) { x.target.classList.add('v'); io.unobserve(x.target); } }); }, { threshold: 0.07 });
+            document.querySelectorAll('.fi').forEach(function (el) { io.observe(el); });
+
+            // Mobile menu handling
+            var menuBtn = document.getElementById('menuBtn');
+            var mobileMenu = document.getElementById('mobileMenu');
+            if (menuBtn && mobileMenu) {
+                menuBtn.addEventListener('click', function () {
+                    mobileMenu.classList.toggle('open');
+                });
+            }
+        })();
+
+        function closeMobileMenu() {
+            var mobileMenu = document.getElementById('mobileMenu');
+            if (mobileMenu) {
+                mobileMenu.classList.remove('open');
+            }
+        }
+    </script>
+</body>
+
+</html>
